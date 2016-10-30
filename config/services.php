@@ -22,8 +22,6 @@ return [
     ],
 
     'mailgun' => [
-        'domain' => 'operation-eskimo.com',
-        'secret' => 'key-be1988be7b88e2e7a29929317341609c',
     ],
 
     'ses' => [
