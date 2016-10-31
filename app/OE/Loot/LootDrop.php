@@ -11,7 +11,7 @@ class LootDrop extends Model
     {
         $lootDrop = new LootDrop();
         $lootDrop->loot_time = Carbon::createFromTimestamp($event['timestamp']/1000);
-        $lootDrop->raw_time = $event['timestamp'];
+        $lootDrop->raw_time = (string) $event['timestamp'];
         $lootDrop->character_name = $event['character'];
         $lootDrop->item_id = $event['itemId'];
         $lootDrop->context = $event['context'];
@@ -25,6 +25,8 @@ class LootDrop extends Model
         $lootDrop->tooltip_description = $event['nameDescription'];
         $lootDrop->tooltip_color = $event['nameDescriptionColor'];
         $lootDrop->heroic_tooltip = $event['heroicTooltip'];
+        $lootDrop->unique_identifier = $event['unique_identifier'];
+
         return $lootDrop;
     }
 

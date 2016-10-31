@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\OE\Forum\Link;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use JBBCode\DefaultCodeDefinitionSet;
+use JBBCode\Parser;
 use Pwnraid\Bnet\Region;
 use Pwnraid\Bnet\Warcraft\Characters\CharacterRequest;
 use Pwnraid\Bnet\Warcraft\Client;

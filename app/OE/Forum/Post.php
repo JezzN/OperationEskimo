@@ -10,6 +10,7 @@ namespace App\OE\Forum;
 
 
 use Illuminate\Database\Eloquent\Model;
+use s9e\TextFormatter\Configurator;
 
 class Post extends Model
 {
@@ -23,5 +24,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function renderContent()
+    {
+        return preg_replace('/(<e>|<s>).+(<\/s>|<\/e>)/', '', $this->content);
     }
 }

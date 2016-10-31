@@ -54,9 +54,22 @@ class GuildLootDropsImporter
      */
     private function isPendingImport($event)
     {
-        $lootTimingMarginForError = (3600 * 3 * 1000);
+        $result = LootDrop::where('unique_identifier', $event['unique_identifier'])->count();
 
-        return LootDrop::where('character_name', $event['character'])->whereBetween('raw_time', [$event['timestamp'] - $lootTimingMarginForError, $event['timestamp'] + $lootTimingMarginForError])->where('item_id', $event['itemId'])->count() <= 0;
+        if( $result >= 1 ) return false;
+
+        $lootTimingMarginForError = (3600 * 3 * 1000);
+        $from = $event['timestamp'] - $lootTimingMarginForError;
+        $to = $event['timestamp'] + $lootTimingMarginForError;
+
+        return LootDrop::where('character_name', $event['character'])->whereBetween('raw_time', [$from, $to])->where('item_id', $event['itemId'])->count() <= 0;
+    }
+
+    private function createIdentifier($event)
+    {
+        $time = Carbon::createFromTimestamp($event['timestamp'] / 1000)->format('Y-m-d');
+
+        return sha1($time . $event['character'] . $event['itemId']);
     }
 
     private function getItemDetails($itemId, $bonusList)
@@ -107,12 +120,17 @@ class GuildLootDropsImporter
             return;
         }
 
+        $event['unique_identifier'] = $this->createIdentifier($event);
+
         if (!$this->isPendingImport($event)) {
             return;
         }
 
         $event = $event + $this->getItemDetails($event['itemId'], $event['bonusLists'])->jsonSerialize();
 
-        LootDrop::createFromLootEvent($event)->save();
+        try{
+            LootDrop::createFromLootEvent($event)->save();
+        } catch ( \Exception $e ) {
+        }
     }
 }

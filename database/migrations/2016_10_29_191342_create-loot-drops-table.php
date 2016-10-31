@@ -30,6 +30,7 @@ class CreateLootDropsTable extends Migration
             $table->string('tooltip_description');
             $table->string('tooltip_color');
             $table->string('heroic_tooltip');
+            $table->string('unique_identifier')->unique();
             $table->timestamps();
         });
     }

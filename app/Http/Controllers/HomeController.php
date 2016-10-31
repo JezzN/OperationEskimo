@@ -7,6 +7,7 @@ use App\OE\News\NewsRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use JBBCode\Parser;
 
 class HomeController extends Controller
 {
