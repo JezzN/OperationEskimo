@@ -22,6 +22,6 @@ class NewsRepository
 
         $newsDiscussions = $this->db->connection('forums')->table('discussions_tags')->where('tag_id', $tagId)->pluck('discussion_id');
 
-        return Post::whereIn('discussion_id', $newsDiscussions)->orderBy('time', 'desc')->paginate(5);
+        return Post::whereIn('discussion_id', $newsDiscussions)->orderBy('time', 'desc')->where('number', 1)->paginate(5);
     }
 }
