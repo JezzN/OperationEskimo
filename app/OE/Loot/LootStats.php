@@ -49,7 +49,10 @@ class LootStats
 
     public function weeklyCacheItems()
     {
-        $caches = LootDrop::where('context', 'challenge-mode-jackpot')->whereIn('character_name', $this->raiders)->get();
+        $from = Carbon::now()->dayOfWeek == Carbon::WEDNESDAY ? new Carbon("wednesday") : new Carbon("last wednesday");
+        $to = Carbon::now();
+
+        $caches = LootDrop::where('context', 'challenge-mode-jackpot')->whereBetween('loot_time', [$from, $to])->whereIn('character_name', $this->raiders)->get();
 
         return $caches->sort(function($a, $b) {
             return $b->getCacheLevel() > $a->getCacheLevel();
