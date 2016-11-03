@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c76c1237e424cc59e195fab6f79dd9f",
+    "content-hash": "ef0298e98d27bf812008009e61ca41d1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -518,52 +518,6 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
-        },
-        {
-            "name": "jbbcode/jbbcode",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jbowens/jBBCode.git",
-                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jbowens/jBBCode/zipball/645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
-                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "JBBCode": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jackson Owens",
-                    "email": "jackson_owens@alumni.brown.edu",
-                    "homepage": "http://jbowens.org/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A lightweight but extensible BBCode parser written in PHP 5.3.",
-            "homepage": "http://jbbcode.com/",
-            "keywords": [
-                "BB",
-                "bbcode"
-            ],
-            "time": "2014-07-06T05:48:20+00:00"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1166,6 +1120,56 @@
             "time": "2016-10-17T15:23:22+00:00"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {
@@ -1527,66 +1531,6 @@
                 "uuid"
             ],
             "time": "2016-10-02T15:51:17+00:00"
-        },
-        {
-            "name": "s9e/text-formatter",
-            "version": "0.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/s9e/TextFormatter.git",
-                "reference": "9f47352d246bdacf58382d431e69a50b145dc059"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/9f47352d246bdacf58382d431e69a50b145dc059",
-                "reference": "9f47352d246bdacf58382d431e69a50b145dc059",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-filter": "*",
-                "lib-pcre": ">=7.2",
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-curl": "Improves the performance of the MediaEmbed plugin and some JavaScript minifiers",
-                "ext-intl": "Allows international URLs to be accepted by the URL filter",
-                "ext-json": "Enables the generation of a JavaScript parser",
-                "ext-mbstring": "Improves the performance of the PHP renderer",
-                "ext-tokenizer": "Improves the performance of the PHP renderer",
-                "ext-xsl": "Enables the XSLT renderer",
-                "ext-zlib": "Enables gzip compression when scraping content via the MediaEmbed plugin"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "s9e\\TextFormatter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Multi-purpose text formatting and markup library. Plugins offer support for BBCodes, Markdown, emoticons, HTML, embedding media (YouTube, etc...), enhanced typography and more.",
-            "homepage": "https://github.com/s9e/TextFormatter/",
-            "keywords": [
-                "bbcode",
-                "bbcodes",
-                "blog",
-                "censor",
-                "embed",
-                "emoji",
-                "emoticons",
-                "engine",
-                "forum",
-                "html",
-                "markdown",
-                "markup",
-                "media",
-                "parser",
-                "shortcodes"
-            ],
-            "time": "2016-10-16T11:05:36+00:00"
         },
         {
             "name": "sebastian/version",
@@ -2664,6 +2608,52 @@
             "time": "2015-05-11T14:41:42+00:00"
         },
         {
+            "name": "jbbcode/jbbcode",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbowens/jBBCode.git",
+                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jbowens/jBBCode/zipball/645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
+                "reference": "645b6a1c0afa92b7d029d3417ebd8b60a5c578b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JBBCode": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackson Owens",
+                    "email": "jackson_owens@alumni.brown.edu",
+                    "homepage": "http://jbowens.org/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight but extensible BBCode parser written in PHP 5.3.",
+            "homepage": "http://jbbcode.com/",
+            "keywords": [
+                "BB",
+                "bbcode"
+            ],
+            "time": "2014-07-06T05:48:20+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.5",
             "source": {
@@ -3362,6 +3352,66 @@
                 "xunit"
             ],
             "time": "2016-10-09T07:01:45+00:00"
+        },
+        {
+            "name": "s9e/text-formatter",
+            "version": "0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/s9e/TextFormatter.git",
+                "reference": "9f47352d246bdacf58382d431e69a50b145dc059"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/9f47352d246bdacf58382d431e69a50b145dc059",
+                "reference": "9f47352d246bdacf58382d431e69a50b145dc059",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-filter": "*",
+                "lib-pcre": ">=7.2",
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-curl": "Improves the performance of the MediaEmbed plugin and some JavaScript minifiers",
+                "ext-intl": "Allows international URLs to be accepted by the URL filter",
+                "ext-json": "Enables the generation of a JavaScript parser",
+                "ext-mbstring": "Improves the performance of the PHP renderer",
+                "ext-tokenizer": "Improves the performance of the PHP renderer",
+                "ext-xsl": "Enables the XSLT renderer",
+                "ext-zlib": "Enables gzip compression when scraping content via the MediaEmbed plugin"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "s9e\\TextFormatter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Multi-purpose text formatting and markup library. Plugins offer support for BBCodes, Markdown, emoticons, HTML, embedding media (YouTube, etc...), enhanced typography and more.",
+            "homepage": "https://github.com/s9e/TextFormatter/",
+            "keywords": [
+                "bbcode",
+                "bbcodes",
+                "blog",
+                "censor",
+                "embed",
+                "emoji",
+                "emoticons",
+                "engine",
+                "forum",
+                "html",
+                "markdown",
+                "markup",
+                "media",
+                "parser",
+                "shortcodes"
+            ],
+            "time": "2016-10-16T11:05:36+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

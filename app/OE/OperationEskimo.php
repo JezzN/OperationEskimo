@@ -64,7 +64,7 @@ class OperationEskimo
             $character = $member['character']['character'];
             $characterName = $character['name'];
 
-            $role = $this->rosterConfiguration->getRole($characterName);
+            $role = $this->getSpecifiedRole($characterName);
 
             if( ! $role ) {
                 $role = isset($character['spec']) ? $character['spec']['role'] : null;
@@ -115,7 +115,7 @@ class OperationEskimo
         $name = $character['name'];
         $class = $character['class'];
 
-        if( $role = $this->getSpecifiedRole($name) ) return $role;
+        if( $role = $this->rosterConfiguration->getRole($name) ) return $role;
 
         if( in_array($class, [1,2,4,6,10,12]) ) return 'melee';
 
