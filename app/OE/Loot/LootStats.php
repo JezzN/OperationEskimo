@@ -17,7 +17,7 @@ class LootStats
     {
         $stats = [];
 
-        $lootersWeekly = $this->lootBetween(Carbon::now()->subWeek(), Carbon::now());
+        $lootersWeekly = $this->lootBetween($this->thisWeek()[0], $this->thisWeek()[1]);
         $lootersMonthly = $this->lootBetween(Carbon::now()->subMonth(), Carbon::now());
 
         foreach( $this->raiders as $raider ) {
@@ -40,6 +40,7 @@ class LootStats
         return LootDrop::selectRaw('count(*) as count, character_name')
             ->whereBetween('loot_time', [$from, $to])
             ->where('context', 'LIKE', 'challenge-mode%')
+            ->where('context', '!=', 'challenge-mode-jackpot')
             ->whereIn('character_name', $this->raiders)
             ->groupBy('character_name')
             ->orderBy('count', 'desc')
@@ -49,10 +50,7 @@ class LootStats
 
     public function weeklyCacheItems()
     {
-        $from = Carbon::now()->dayOfWeek == Carbon::WEDNESDAY ? new Carbon("wednesday") : new Carbon("last wednesday");
-        $to = Carbon::now();
-
-        $caches = LootDrop::where('context', 'challenge-mode-jackpot')->whereBetween('loot_time', [$from, $to])->whereIn('character_name', $this->raiders)->get();
+        $caches = LootDrop::where('context', 'challenge-mode-jackpot')->whereBetween('loot_time', $this->thisWeek())->whereIn('character_name', $this->raiders)->get();
 
         return $caches->sort(function($a, $b) {
             return $b->getCacheLevel() > $a->getCacheLevel();
@@ -64,5 +62,13 @@ class LootStats
         $hasCache = $this->weeklyCacheItems()->pluck('character_name')->toArray();
 
         return array_diff($this->raiders, $hasCache);
+    }
+
+    private function thisWeek()
+    {
+        return [
+            $from = Carbon::now()->dayOfWeek == Carbon::WEDNESDAY ? new Carbon("wednesday") : new Carbon("last wednesday"),
+            $to = Carbon::now()
+        ];
     }
 }
