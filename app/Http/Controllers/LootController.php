@@ -54,7 +54,7 @@ class LootController extends Controller
 
     public function legendary()
     {
-        $drops = LootDrop::orderBy('loot_time', 'desc')->where('quality', '>=', 5)->paginate(15);
+        $drops = LootDrop::orderBy('loot_time', 'desc')->where('quality', '=', 5)->paginate(15);
 
         return view('loot.legendary')
             ->withDrops($drops);
