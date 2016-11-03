@@ -34,7 +34,7 @@ class GuildMemberCheck extends Command
 
     public function handle()
     {
-        $raiders = $this->operationEskimo->raiders()->toArray();
+        $raiders = $this->operationEskimo->raiders()->pluck('character.character.name')->toArray();
 
         $lastSetOfRaiders = Cache::get('operation_eskimo_raiders', []);
 

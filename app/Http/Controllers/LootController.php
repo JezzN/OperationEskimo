@@ -59,4 +59,12 @@ class LootController extends Controller
         return view('loot.legendary')
             ->withDrops($drops);
     }
+
+    public function mythicRaid()
+    {
+        $drops = LootDrop::orderBy('loot_time', 'desc')->where('context', '=', 'raid-mythic')->where('item_level', '>=', 880)->paginate(40);
+
+        return view('loot.mythic-raids')
+            ->withDrops($drops);
+    }
 }
