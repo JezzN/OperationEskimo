@@ -8,7 +8,7 @@
             <table class="table table-striped"   >
                 <tr>
                     <th>Player</th>
-                    <th>This Week</th>
+                    <th>This Reset</th>
                     <th>This Month</th>
                 </tr>
                 @foreach( $mythicPlusLooters as $stat )
