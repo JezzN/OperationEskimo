@@ -51,4 +51,12 @@ class LootController extends Controller
             ->with('cacheItems', $this->lootStats->weeklyCacheItems())
             ->with('raidersWithoutCache', $this->lootStats->withoutCacheReward());
     }
+
+    public function legendary()
+    {
+        $drops = LootDrop::orderBy('loot_time', 'desc')->where('quality', '>=', 5)->paginate(15);
+
+        return view('loot.legendary')
+            ->withDrops($drops);
+    }
 }
