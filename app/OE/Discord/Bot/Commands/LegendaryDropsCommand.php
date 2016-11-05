@@ -7,6 +7,8 @@ use Discord\Parts\Channel\Message;
 
 class LegendaryDropsCommand
 {
+    public $description = 'List recent legendary drops';
+
     public function execute(Message $message)
     {
         $legendaries = LootDrop::where('quality', 5)->where('item_level', '>=', 895)->orderBy('loot_time', 'desc')->take(5)->get();
