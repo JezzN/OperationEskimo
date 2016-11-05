@@ -34,6 +34,6 @@ class ReportNewForumThreads extends AbstractDatabaseChangeReporter
 
         $link = config('operation-eskimo.forum-link') . "d/{$discussion->id}-{$discussion->slug}";
 
-        return "{$username} created new forum thread \"{$discussion->title}\": " . $link;
+        return "{$username} created new forum thread **{$discussion->title}**: " . $link;
     }
 }
