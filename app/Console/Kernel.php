@@ -6,6 +6,8 @@ use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
 use App\Console\Commands\ParseForumConfigurationThreads;
+use App\Console\Commands\RunDiscordBot;
+use App\Console\Commands\ReportNewThreads;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -20,7 +22,8 @@ class Kernel extends ConsoleKernel
         GuildMemberCheck::class,
         GuildLootImport::class,
         GuildItemLevelUpdate::class,
-        ParseForumConfigurationThreads::class
+        ParseForumConfigurationThreads::class,
+        RunDiscordBot::class
     ];
 
     /**

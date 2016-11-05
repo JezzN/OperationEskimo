@@ -7,6 +7,11 @@ use LogicException;
 
 class LootDrop extends Model
 {
+    public function readableLootTime()
+    {
+        return (new Carbon($this->loot_time))->format('H:i M jS');
+    }
+
     public static function createFromLootEvent($event) : LootDrop
     {
         $lootDrop = new LootDrop();

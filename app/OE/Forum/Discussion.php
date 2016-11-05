@@ -7,4 +7,8 @@ class Discussion extends Model
 {
     protected $connection = 'forums';
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'discussions_tags');
+    }
 }

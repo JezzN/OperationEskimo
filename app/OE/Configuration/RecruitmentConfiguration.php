@@ -48,7 +48,7 @@ class RecruitmentConfiguration
 
     private function createRecruitmentName($class, $spec = null)
     {
-        $class = ucfirst($class);
+        $class = ucwords($class);
 
         if( empty($spec) ) return $class;
 

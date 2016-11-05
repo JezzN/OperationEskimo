@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\OE\Forum\Link;
+use Discord\Discord;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use JBBCode\DefaultCodeDefinitionSet;
@@ -48,5 +49,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CharacterRequest::class, function() {
             return app(WarcraftClient::class)->characters()->on(config('services.battle-net.realm'));
         });
+
+        $this->app->singleton(Discord::class, function() {
+            return new Discord(['token' => config('operation-eskimo.discord-bot-token')]);
+        });
     }
+
 }

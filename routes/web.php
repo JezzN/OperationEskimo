@@ -11,6 +11,9 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Request;
+
 Route::get('/', 'HomeController@index');
 Route::get('/roster', 'RosterController@index');
 Route::get('/loot', ['uses' => 'LootController@index', 'as' => 'loot']);
@@ -19,3 +22,8 @@ Route::get('/loot/mythic-plus-cache', ['uses' => 'LootController@mythicPlusCache
 Route::get('/loot/type/legendary', ['uses' => 'LootController@legendary', 'as' => 'loot.legendary']);
 Route::get('/loot/raid', ['uses' => 'LootController@mythicRaid', 'as' => 'loot.raid']);
 Route::get('/loot/{characterName}', ['uses' => 'LootController@character', 'as' => 'loot.character']);
+
+Route::post('/test', function(\Illuminate\Http\Request $request) {
+
+    return "a" . $request->json('content');
+});
