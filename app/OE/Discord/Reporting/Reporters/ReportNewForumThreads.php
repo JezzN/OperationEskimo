@@ -19,7 +19,11 @@ class ReportNewForumThreads extends AbstractDatabaseChangeReporter
        foreach( $discussions as $discussion ) {
            $message = $this->createMessage($discussion);
 
-           $this->isOfficerThread($discussion) ? $oeDiscord->sendMessageToOfficerChat($message) : $oeDiscord->sendMessageToGeneralChat($message);
+           $oeDiscord->sendMessageToOfficerChat($message);
+
+           if( ! $this->isOfficerThread($discussion) ) {
+               $oeDiscord->sendMessageToGeneralChat($message);
+           }
        }
    }
 
