@@ -54,6 +54,7 @@ class RunDiscordBot extends Command
      */
     public function handle()
     {
+        dd($this->reporter->report($this->discord));
         $this->discord->loop->addPeriodicTimer(10, function() {
             $this->reporter->report($this->discord);
         });

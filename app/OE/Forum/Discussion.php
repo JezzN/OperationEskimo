@@ -11,4 +11,9 @@ class Discussion extends Model
     {
         return $this->belongsToMany(Tag::class, 'discussions_tags');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'start_user_id');
+    }
 }
