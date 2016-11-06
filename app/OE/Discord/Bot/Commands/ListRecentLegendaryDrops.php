@@ -1,13 +1,14 @@
 <?php
 namespace App\OE\Discord\Bot\Commands;
 
+use App\OE\Discord\Bot\Command;
 use App\OE\Loot\LootDrop;
 use Carbon\Carbon;
 use Discord\Parts\Channel\Message;
 
-class LegendaryDropsCommand
+class ListRecentLegendaryDrops extends Command
 {
-    public $description = 'List recent legendary drops';
+    protected $description = 'List recent legendary drops';
 
     public function execute(Message $message)
     {

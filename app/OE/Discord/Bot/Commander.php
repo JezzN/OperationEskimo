@@ -1,13 +1,15 @@
 <?php
 namespace App\OE\Discord\Bot;
 
-use App\OE\Discord\Bot\Commands\LegendaryDropsCommand;
+use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
+use App\OE\Discord\Bot\Commands\ListCommands;
 use Discord\Parts\Channel\Message;
 
 class Commander
 {
-    private $commands = [
-        'legendaries' => LegendaryDropsCommand::class
+    private static $commands = [
+        'commands' => ListCommands::class,
+        'legendaries' => ListRecentLegendaryDrops::class
     ];
 
     public function execute(Message $message)
@@ -16,13 +18,9 @@ class Commander
 
         $command = $this->extractCommandName($message);
 
-        if ( $command === 'commands' ) {
-            return $this->listCommands($message);
-        }
+        if( ! self::commandExists($command) ) return;
 
-        if( ! isset($this->commands[$command]) ) return;
-
-        return app($this->commands[$command])->execute($message);
+        return $this->resolveCommand($command)->execute($message);
     }
 
     private function extractCommandName(Message $message)
@@ -35,16 +33,18 @@ class Commander
         return starts_with($message->content, '!');
     }
 
-    private function listCommands($message)
+    private function resolveCommand($command) : Command
     {
-        $reply = "Available command list:" . PHP_EOL . PHP_EOL;
+        return app(self::getCommands()[$command]);
+    }
 
-        foreach( $this->commands as $command => $object ) {
-            $description = app($object)->description;
+    public static function getCommands()
+    {
+        return static::$commands;
+    }
 
-            $reply .= "**!{$command}** - {$description}" . PHP_EOL . PHP_EOL;
-        }
-
-        $message->channel->sendMessage($reply);
+    public static function commandExists($command)
+    {
+        return isset(self::getCommands()[$command]);
     }
 }
