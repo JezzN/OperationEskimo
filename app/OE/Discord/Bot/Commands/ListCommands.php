@@ -2,6 +2,7 @@
 namespace App\OE\Discord\Bot\Commands;
 
 use App\OE\Discord\Bot\Command;
+use App\OE\Discord\Bot\Commander;
 use Discord\Parts\Channel\Message;
 
 class ListCommands extends Command
@@ -10,12 +11,12 @@ class ListCommands extends Command
 
     public function execute(Message $message)
     {
-        $reply = "Available command list:" . PHP_EOL . PHP_EOL;
+        $reply = "Command List:" . PHP_EOL . PHP_EOL;
 
-        foreach( $this->commands as $command => $object ) {
-            $description = app($object)->getDescription();
+        foreach( Commander::getCommands() as $commandName => $command ) {
+            $description = Commander::resolveCommand($commandName)->getDescription();
 
-            $reply .= "**!{$command}** - {$description}" . PHP_EOL . PHP_EOL;
+            $reply .= "**!{$commandName}** - {$description}" . PHP_EOL;
         }
 
         $message->channel->sendMessage($reply);

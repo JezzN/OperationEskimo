@@ -20,7 +20,7 @@ class Commander
 
         if( ! self::commandExists($command) ) return;
 
-        return $this->resolveCommand($command)->execute($message);
+        return self::resolveCommand($command)->execute($message);
     }
 
     private function extractCommandName(Message $message)
@@ -33,16 +33,36 @@ class Commander
         return starts_with($message->content, '!');
     }
 
-    private function resolveCommand($command) : Command
+    /**
+     * Resolve a command.
+     *
+     * @return Command
+     * @param $command
+     * @author Jeremy
+     */
+    public static function resolveCommand($command) : Command
     {
         return app(self::getCommands()[$command]);
     }
 
+    /**
+     * Get the current set of commands.
+     *
+     * @return array
+     * @author Jeremy
+     */
     public static function getCommands()
     {
         return static::$commands;
     }
 
+    /**
+     * Check if a command exists.
+     *
+     * @return bool
+     * @param $command
+     * @author Jeremy
+     */
     public static function commandExists($command)
     {
         return isset(self::getCommands()[$command]);
