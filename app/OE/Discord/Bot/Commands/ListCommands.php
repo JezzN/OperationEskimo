@@ -9,12 +9,26 @@ class ListCommands extends Command
 {
     protected $description = 'List available commands';
 
+    /** @var Commander */
+    private $commander;
+
+    public function __construct(Commander $commander)
+    {
+        $this->commander = $commander;
+    }
+
+    /**
+     * Executes the commands, printing a list of all available commands to the channel.
+     *
+     * @author Jeremy
+     * @param Message $message
+     */
     public function execute(Message $message)
     {
         $reply = "Command List:" . PHP_EOL . PHP_EOL;
 
-        foreach( Commander::getCommands() as $commandName => $command ) {
-            $description = Commander::resolveCommand($commandName)->getDescription();
+        foreach( $this->commander->getCommands() as $commandName => $command ) {
+            $description = $this->commander->resolveCommand($commandName)->getDescription();
 
             $reply .= "**!{$commandName}** - {$description}" . PHP_EOL;
         }

@@ -7,27 +7,49 @@ use Discord\Parts\Channel\Message;
 
 class Commander
 {
-    private static $commands = [
+    private $commands = [
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class
     ];
 
+    /**
+     * Determines if the message is a command and if it is, will execute the required command.
+     *
+     * @author Jeremy
+     * @param Message $message
+     */
     public function execute(Message $message)
     {
         if( ! $this->isCommand($message) ) return;
 
         $command = $this->extractCommandName($message);
 
-        if( ! self::commandExists($command) ) return;
+        if( ! $this->commandExists($command) ) return;
 
-        return self::resolveCommand($command)->execute($message);
+        return $this->resolveCommand($command)->execute($message);
     }
 
+    /**
+     * Extract the name of the command from the message content.
+     *
+     * A command will begin with an exclamation mark, for example !legendaries.
+     *
+     * @return mixed
+     * @param Message $message
+     * @author Jeremy
+     */
     private function extractCommandName(Message $message)
     {
         return preg_replace('/[^a-z]/', '', strtolower($message->content));
     }
 
+    /**
+     * Returns TRUE if the message content looks like a command.
+     *
+     * @return bool
+     * @param Message $message
+     * @author Jeremy
+     */
     private function isCommand(Message $message)
     {
         return starts_with($message->content, '!');
@@ -40,9 +62,9 @@ class Commander
      * @param $command
      * @author Jeremy
      */
-    public static function resolveCommand($command) : Command
+    public function resolveCommand($command) : Command
     {
-        return app(self::getCommands()[$command]);
+        return app($this->getCommands()[$command]);
     }
 
     /**
@@ -51,9 +73,9 @@ class Commander
      * @return array
      * @author Jeremy
      */
-    public static function getCommands()
+    public function getCommands()
     {
-        return static::$commands;
+        return $this->commands;
     }
 
     /**
@@ -63,8 +85,8 @@ class Commander
      * @param $command
      * @author Jeremy
      */
-    public static function commandExists($command)
+    public function commandExists($command)
     {
-        return isset(self::getCommands()[$command]);
+        return isset($this->getCommands()[$command]);
     }
 }
