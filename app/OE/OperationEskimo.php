@@ -28,7 +28,7 @@ class OperationEskimo
      */
     public function raiders() : Collection
     {
-        return $this->filterByRank([0,1,4,5]);
+        return $this->filterByRank([0,1,4,5,6]);
     }
 
     public function isRaider($character)
