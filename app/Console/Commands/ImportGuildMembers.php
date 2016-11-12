@@ -65,11 +65,12 @@ class ImportGuildMembers extends Command
         $rank = $characterInfo['rank'];
         $character = $characterInfo['character']['character'];
 
-        $member = GuildMember::where('character_name', $character['name'])->first();
+        $member = GuildMember::where('character_name_hash_lookup', sha1($character['name']))->first();
 
         if( ! $member ) {
             $member = new GuildMember();
             $member->character_name = $character['name'];
+            $member->character_name_hash_lookup = sha1($character['name']);
         }
 
         $member->rank = $rank + 1;
@@ -93,7 +94,7 @@ class ImportGuildMembers extends Command
     {
         if( ! in_array('rank', array_keys($changes)) ) return;
 
-        $existing = GuildMember::where('character_name', $member->character_name)->first();
+        $existing = GuildMember::where('character_name_hash_lookup', $member->character_name_hash_lookup)->first();
 
         if( ! $existing ) return;
 

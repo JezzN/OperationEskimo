@@ -3,13 +3,15 @@ namespace App\OE\Discord\Reporting;
 
 use App\OE\Discord\Reporting\Reporters\ReportLegendaryDrops;
 use App\OE\Discord\Reporting\Reporters\ReportNewForumThreads;
+use App\OE\Discord\Reporting\Reporters\ReportRosterChanges;
 use Discord\Discord;
 
 class DiscordReporter
 {
     private $reports = [
         ReportNewForumThreads::class,
-        ReportLegendaryDrops::class
+        ReportLegendaryDrops::class,
+        ReportRosterChanges::class
     ];
 
     public function report(Discord $discord)

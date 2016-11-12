@@ -16,6 +16,7 @@ class CreateGuildMembersTable extends Migration
         Schema::create('guild_members', function (Blueprint $table) {
             $table->increments('id');
             $table->string('character_name')->index();
+            $table->string('character_name_hash_lookup')->index();
             $table->integer('rank')->index();
             $table->integer('average_item_level')->index()->nullable();
             $table->integer('average_item_level_equipped')->index()->nullable();
