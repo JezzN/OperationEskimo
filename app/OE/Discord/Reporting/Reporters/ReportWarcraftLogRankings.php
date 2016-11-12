@@ -30,8 +30,9 @@ class ReportWarcraftLogRankings extends AbstractDatabaseChangeReporter
         foreach( $chunk as $ranking ) {
             $difficulty = ucfirst($ranking->difficulty);
             $metric = strtoupper($ranking->metric);
+            $percentile = $ranking->percentile >= 99 ? 99 : $ranking->percentile;
 
-            $message .= "{$ranking->character_name} ranked {$ranking->percentile}% on {$difficulty} {$ranking->encounter} with {$ranking->total} {$metric}" . PHP_EOL . PHP_EOL;
+            $message .= "{$ranking->character_name} ranked {$percentile}% on {$difficulty} {$ranking->encounter} with {$ranking->total} {$metric}" . PHP_EOL . PHP_EOL;
         }
 
         return $message;
