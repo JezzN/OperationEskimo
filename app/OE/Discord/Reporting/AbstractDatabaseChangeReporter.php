@@ -2,21 +2,22 @@
 namespace App\OE\Discord\Reporting;
 
 use Illuminate\Cache\Repository;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 
 abstract class AbstractDatabaseChangeReporter
 {
-    /** @var Repository */
-    private $cache;
+    /** @var DatabaseManager */
+    private $db;
 
-    public function __construct(Repository $cache)
+    public function __construct(DatabaseManager $db)
     {
-        $this->cache = $cache;
+        $this->db = $db;
     }
 
     protected function getNewRecords($query)
     {
-        $lastId = $this->cache->get($this->generateCacheKey());
+        $lastId = $this->getLastId();
 
         $records = $this->getRecords($query, (int) $lastId);
 
@@ -29,9 +30,27 @@ abstract class AbstractDatabaseChangeReporter
         return $records;
     }
 
+    protected function getLastId()
+    {
+        $position = $this->db->table('discord_reporting_status')->where('report', $this->generateCacheKey())->first();
+
+        if( ! $position ) return 0;
+
+        return $position->position;
+    }
+
     private function updateCacheWithId($id)
     {
-        $this->cache->forever($this->generateCacheKey(), $id);
+        $updated = (bool) $this->db->table('discord_reporting_status')->where('report', $this->generateCacheKey())->update([
+            'position' => $id
+        ]);
+
+        if( $updated ) return;
+
+        $this->db->table('discord_reporting_status')->insert([
+            'report' => $this->generateCacheKey(),
+            'position' => $id
+        ]);
     }
 
     private function generateCacheKey()
