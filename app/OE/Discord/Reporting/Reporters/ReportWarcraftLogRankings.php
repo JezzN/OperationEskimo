@@ -33,5 +33,7 @@ class ReportWarcraftLogRankings extends AbstractDatabaseChangeReporter
 
             $message .= "{$ranking->character_name} ranked {$ranking->percentile}% on {$difficulty} {$ranking->encounter} with {$ranking->total} {$metric}" . PHP_EOL . PHP_EOL;
         }
+
+        return $message;
     }
 }
