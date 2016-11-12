@@ -10,6 +10,9 @@ abstract class AbstractDatabaseChangeReporter
     /** @var DatabaseManager */
     private $db;
 
+    /** @var int The maximum number of records to retreive at a time before deciding that the tracking has broken and to show nothing */
+    protected $maxRecords = 5;
+
     public function __construct(DatabaseManager $db)
     {
         $this->db = $db;
@@ -25,7 +28,7 @@ abstract class AbstractDatabaseChangeReporter
 
         $this->updateCacheWithId($records->last()->id);
 
-        if( $records->count() > 5 ) return new Collection();
+        if( $records->count() > $this->maxRecords ) return new Collection();
 
         return $records;
     }
