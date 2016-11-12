@@ -21,6 +21,10 @@ return [
         'region' => 'eu',
     ],
 
+    'warcraft-logs' => [
+        'api-key' => env('WARCRAFT_LOGS_API_KEY')
+    ],
+
     'mailgun' => [
     ],
 
