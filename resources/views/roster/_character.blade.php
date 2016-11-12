@@ -1,9 +1,9 @@
-<div class="character class-{{ $member['character']['character']['class'] }}">
+<div class="character class-{{ $member->class }}">
     <div class="character-section">
-        <a target="_blank" href="http://eu.battle.net/wow/en/character/ragnaros/{{ $member['character']['character']['name']  }}/advanced">{{ $member['character']['character']['name'] }}</a> ({{ isset($member['character']['character']['spec']) ? $member['character']['character']['spec']['name']: '?' }})
+        <a target="_blank" href="http://eu.battle.net/wow/en/character/ragnaros/{{ $member->character_name  }}/advanced">{{ $member->character_name }}</a>
 
     </div>
     <div class="character-section">
-        {{ $items->averageForCharacter($member) }}
+        {{ $member->average_item_level_equipped }} ({{ $member->average_item_level }})
     </div>
 </div>

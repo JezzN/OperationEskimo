@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
+use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ParseForumConfigurationThreads;
 use App\Console\Commands\RunDiscordBot;
 use App\Console\Commands\ReportNewThreads;
@@ -19,11 +20,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        GuildMemberCheck::class,
         GuildLootImport::class,
-        GuildItemLevelUpdate::class,
         ParseForumConfigurationThreads::class,
-        RunDiscordBot::class
+        RunDiscordBot::class,
+        ImportGuildMembers::class
     ];
 
     /**

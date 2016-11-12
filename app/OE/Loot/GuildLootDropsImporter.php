@@ -4,6 +4,7 @@ namespace App\OE\Loot;
 use App\OE\Loot\ItemLevelFetcher;
 use App\OE\Loot\LootDrop;
 use App\OE\OperationEskimo;
+use App\OE\WoW\OeGuildApiResponse;
 use Carbon\Carbon;
 use Pwnraid\Bnet\Warcraft\Characters\CharacterRequest;
 use Pwnraid\Bnet\Warcraft\Client;
@@ -100,7 +101,7 @@ class GuildLootDropsImporter
 
     private function importLootFromCharacterFeeds()
     {
-        $raiders = $this->operationEskimo->raiders()->pluck('character.character.name');
+        $raiders = $this->operationEskimo->raiders()->pluck('character_name');
 
         foreach ($raiders as $raider) {
             $character = $this->characters->find($raider, ['feed']);

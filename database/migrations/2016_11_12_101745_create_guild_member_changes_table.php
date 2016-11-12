@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCurrentGearTable extends Migration
+class CreateGuildMemberChangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateCurrentGearTable extends Migration
      */
     public function up()
     {
-        Schema::create('current_gear', function (Blueprint $table) {
+        Schema::create('guild_member_changes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('character_name')->nullable();
+            $table->string('event');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateCurrentGearTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('current_gear');
+        Schema::dropIfExists('guild_member_changes');
     }
 }

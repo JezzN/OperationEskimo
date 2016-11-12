@@ -36,17 +36,12 @@ class ItemLevelFetcher
     {
         $character = $character['character']['character'];
 
-        return $this->cache->remember('item_level_' . $character['name'], Carbon::now()->addMinute(5), function() use ($character) {
+        $character = $this->client->characters()->on($character['realm'])->find($character['name'], ['items']);
 
-            $character = $this->client->characters()->on($character['realm'])->find($character['name'], ['items']);
-
-            return $character['items']['averageItemLevelEquipped'];
-        });
-
+        return [
+            'average' => $character['items']['averageItemLevel'],
+            'equipped' => $character['items']['averageItemLevelEquipped'],
+        ];
     }
 
-    private function createCacheKey($itemId, $bonusList)
-    {
-        return 'item_cache_' . $itemId . implode('', $bonusList);
-    }
 }

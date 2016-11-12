@@ -17,7 +17,7 @@ class RosterConfiguration
         return in_array(strtolower($characterName), $this->getExcluded());
     }
 
-    private function getExcluded() : array
+    public function getExcluded() : array
     {
         return array_map(function($excluded) {
             return strtolower($excluded);

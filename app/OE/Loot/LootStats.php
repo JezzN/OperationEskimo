@@ -2,6 +2,7 @@
 namespace App\OE\Loot;
 
 use App\OE\OperationEskimo;
+use App\OE\WoW\OeGuildApiResponse;
 use Carbon\Carbon;
 
 class LootStats
@@ -10,7 +11,7 @@ class LootStats
 
     public function __construct(OperationEskimo $operationEskimo)
     {
-        $this->raiders = $operationEskimo->raiders()->pluck('character.character.name')->toArray();
+        $this->raiders = $operationEskimo->raiders()->pluck('character_name')->toArray();
     }
 
     public function mythicPlusLootCount()
