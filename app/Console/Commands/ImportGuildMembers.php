@@ -109,7 +109,7 @@ class ImportGuildMembers extends Command
         $exGuildMembers = GuildMember::whereNotIn('character_name', $guildMembers->pluck('character_name'))->get();
 
         foreach( $exGuildMembers as $exGuildMember ) {
-            GuildMemberChange::fromEventString($exGuildMember->character_name, "{$exGuildMember->character_name} ({$exGuildMember->rankName()}) is not longer in the guild");
+            GuildMemberChange::fromEventString($exGuildMember->character_name, "{$exGuildMember->character_name} ({$exGuildMember->rankName()}) is no longer in the guild");
         }
 
         GuildMember::whereNotIn('character_name', $guildMembers->pluck('character_name'))->delete();
