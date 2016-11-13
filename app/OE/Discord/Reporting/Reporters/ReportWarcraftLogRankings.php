@@ -19,7 +19,7 @@ class ReportWarcraftLogRankings extends AbstractDatabaseChangeReporter
         $changes = $this->getNewRecords($query);
 
         foreach( $changes->chunk(5) as $chunk ) {
-            $oeDiscord->sendMessageToOfficerChat($this->createMessage($chunk));
+            $oeDiscord->sendMessageToGeneralChat($this->createMessage($chunk));
         }
     }
 
