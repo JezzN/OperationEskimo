@@ -20,4 +20,5 @@ Route::get('/loot/type/legendary', ['uses' => 'LootController@legendary', 'as' =
 Route::get('/loot/raid', ['uses' => 'LootController@mythicRaid', 'as' => 'loot.raid']);
 Route::get('/loot/{characterName}', ['uses' => 'LootController@character', 'as' => 'loot.character']);
 Route::get('/logs', ['uses' => 'LogsController@index', 'as' => 'logs']);
+Route::get('/logs/averages', ['uses' => 'LogsController@averages', 'as' => 'logs.averages']);
 Route::get('/logs/{character}', ['uses' => 'LogsController@character', 'as' => 'logs.character']);

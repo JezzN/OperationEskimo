@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\OE\OperationEskimo;
 use App\OE\WarcraftLogs\Ranking;
 use App\OE\WarcraftLogs\WarcraftLogs;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
@@ -49,6 +50,8 @@ class ImportWarcraftLogsRankings extends Command
      */
     public function handle()
     {
+        if( Carbon::now()->hour < 19 ) return;
+
         foreach( $this->oe->raiders() as $raider ) {
 
             $rankings = $this->logs->getRankings($raider->character_name);

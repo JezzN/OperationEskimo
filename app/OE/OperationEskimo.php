@@ -54,6 +54,11 @@ class OperationEskimo
         return $this->raidersQuery()->where('role', 'melee')->get();
     }
 
+    public function dps()
+    {
+        return $this->raidersQuery()->where('archetype', 'dps')->get();
+    }
+
     public function roleCounts()
     {
         return [
