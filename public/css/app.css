@@ -5876,4 +5876,22 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.percentile {
+  font-weight: 700; }
+
+.percentile-90 {
+  color: #ff8000; }
+
+.percentile-80 {
+  color: #a335ee; }
+
+.percentile-50 {
+  color: #0070ff; }
+
+.percentile-25 {
+  color: #139d00; }
+
+.percentile-0 {
+  font-weight: 100; }
+
 /*# sourceMappingURL=app.css.map */
