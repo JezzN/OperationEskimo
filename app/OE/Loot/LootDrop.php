@@ -49,6 +49,19 @@ class LootDrop extends Model
         }
 
         preg_match('/[0-9]{1,2}/', $this->tooltip_description, $matches);
-        return $matches[0];
+        if ( isset($matches[0]) ) {
+            return  $matches[0];
+        }
+
+        return $this->guessCacheLevel();
+    }
+
+    private function guessCacheLevel()
+    {
+        if( $this->item_level >= 885 ) return 12;
+
+        if( $this->item_level >= 880 ) return 10;
+
+        return 0;
     }
 }
