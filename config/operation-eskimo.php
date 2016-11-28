@@ -7,6 +7,7 @@ return [
     'discord-bot-token' => env('DISCORD_BOT_TOKEN'),
     'discord-channel-general' => '140791046119358464',
     'discord-channel-officer' => '233640477751115776',
+    'discord-channel-test' => '249434946022801408',
     'ranks' => [
         1 => 'Guild Master',
         2 => 'Officer',

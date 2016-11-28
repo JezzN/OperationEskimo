@@ -29,6 +29,11 @@ class OperationEskimoDiscord
         return $this->sendMessage(config('operation-eskimo.discord-channel-officer'), $message);
     }
 
+    public function sendMessageToTestChat($message)
+    {
+        return $this->sendMessage(config('operation-eskimo.discord-channel-test'), $message);
+    }
+
     private function sendMessage($channelId, $message)
     {
         return $this->discord->factory(Channel::class, ['id' => $channelId])->sendMessage($message);

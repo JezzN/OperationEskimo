@@ -13,10 +13,10 @@ class ReportNewMmoChampionPosts extends AbstractDatabaseChangeReporter
     {
         $oeDiscord = OperationEskimoDiscord::forServer($discord);
 
-        $items = $this->getNewRecords(NewsItem::where('publish_date', '>', Carbon::now()->subHour(5)));
+        $items = $this->getNewRecords(NewsItem::where('publish_date', '>', Carbon::now()->subDay(5)));
 
         foreach( $items as $item ) {
-            $oeDiscord->sendMessageToGeneralChat("[$item->title]($item->link)");
+            $oeDiscord->sendMessageToTestChat("[$item->title]($item->link)");
         }
     }
 }
