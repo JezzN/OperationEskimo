@@ -16,7 +16,7 @@ class ReportNewMmoChampionPosts extends AbstractDatabaseChangeReporter
         $items = $this->getNewRecords(NewsItem::where('publish_date', '>', Carbon::now()->subDay(5)));
 
         foreach( $items as $item ) {
-            $oeDiscord->sendMessageToTestChat("*$item->title* - $item->link");
+            $oeDiscord->sendMessageToGeneralChat("*$item->title* ($item->link)");
         }
     }
 }
