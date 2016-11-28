@@ -6,6 +6,7 @@ use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
 use App\Console\Commands\ImportGuildMembers;
+use App\Console\Commands\ImportMmoChampionThreads;
 use App\Console\Commands\ImportWarcraftLogsRankings;
 use App\Console\Commands\ParseForumConfigurationThreads;
 use App\Console\Commands\RunDiscordBot;
@@ -25,7 +26,7 @@ class Kernel extends ConsoleKernel
         ParseForumConfigurationThreads::class,
         RunDiscordBot::class,
         ImportGuildMembers::class,
-        ImportWarcraftLogsRankings::class
+        ImportMmoChampionThreads::class,
     ];
 
     /**
