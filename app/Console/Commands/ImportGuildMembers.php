@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\OE\Loot\ItemLevelFetcher;
+use App\OE\WoW\ArtifactImporter;
 use App\OE\WoW\OeGuildApiResponse;
 use App\OE\WoW\GuildMember;
 use App\OE\WoW\GuildMemberChange;
@@ -30,17 +31,20 @@ class ImportGuildMembers extends Command
     private $oe;
     /** @var ItemLevelFetcher */
     private $itemLevelFetcher;
+    /** @var ArtifactImporter */
+    private $artifactImporter;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(OeGuildApiResponse $oe, ItemLevelFetcher $itemLevelFetcher)
+    public function __construct(OeGuildApiResponse $oe, ItemLevelFetcher $itemLevelFetcher, ArtifactImporter $artifactImporter)
     {
         parent::__construct();
         $this->oe = $oe;
         $this->itemLevelFetcher = $itemLevelFetcher;
+        $this->artifactImporter = $artifactImporter;
     }
 
     /**
@@ -87,6 +91,8 @@ class ImportGuildMembers extends Command
 
         $member->save();
 
+        $this->artifactImporter->importArtifactFor($member);
+
         return $member;
     }
 
@@ -114,4 +120,5 @@ class ImportGuildMembers extends Command
 
         GuildMember::whereNotIn('character_name', $guildMembers->pluck('character_name'))->delete();
     }
+
 }

@@ -31,7 +31,12 @@ class OperationEskimo
 
     private function raidersQuery()
     {
-        return GuildMember::whereIn('rank', [1,2,5,6,7])->whereNotIn('character_name', $this->rosterConfiguration->getExcluded())->orderBy('class')->orderBy('character_name');
+        return GuildMember::whereIn('rank', $this->raiderRanks())->whereNotIn('character_name', $this->rosterConfiguration->getExcluded())->orderBy('class')->orderBy('character_name');
+    }
+
+    public function raiderRanks()
+    {
+        return [1,2,5,6,7];
     }
 
     public function unknown()

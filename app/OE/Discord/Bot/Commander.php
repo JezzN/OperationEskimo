@@ -20,10 +20,6 @@ class Commander
      */
     public function execute(Message $message)
     {
-        if( $message->author === 'Maitoz' ) {
-            $message->reply("Shut up cunt");
-        }
-
         if( ! $this->isCommand($message) ) return;
 
         $command = $this->extractCommandName($message);

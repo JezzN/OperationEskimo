@@ -22,3 +22,4 @@ Route::get('/loot/{characterName}', ['uses' => 'LootController@character', 'as' 
 Route::get('/logs', ['uses' => 'LogsController@index', 'as' => 'logs']);
 Route::get('/logs/averages', ['uses' => 'LogsController@averages', 'as' => 'logs.averages']);
 Route::get('/logs/{character}', ['uses' => 'LogsController@character', 'as' => 'logs.character']);
+Route::get('/artifacts', ['uses' => 'ArtifactController@index', 'as' => "artifacts.index"]);
