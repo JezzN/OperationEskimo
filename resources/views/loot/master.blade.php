@@ -8,6 +8,7 @@
             <li role="presentation" class="{{ Route::current()->getName() === 'loot.mythic-plus-cache' ? 'active' : '' }}"><a href="{{ route('loot.mythic-plus-cache') }}">Mythic+ Weekly Cache</a></li>
             <li role="presentation" class="{{ Route::current()->getName() === 'loot.legendary' ? 'active' : '' }}"><a href="{{ route('loot.legendary') }}">Legendary Drops</a></li>
             <li role="presentation" class="{{ Route::current()->getName() === 'loot.raid' ? 'active' : '' }}"><a href="{{ route('loot.raid') }}">Raid Loot</a></li>
+            <li role="presentation" class="{{ Route::current()->getName() === 'artifacts.index' ? 'active' : '' }}"><a href="{{ route('artifacts.index') }}">Artifacts</a></li>
         </ul>
     </div>
 
