@@ -64,6 +64,6 @@ class Artifact extends Model
     {
         if( ! isset($this->artifactSpecMap[$this->artifact_name]) ) return $this->artifact_name;
 
-        return $this->artifact_name;
+        return $this->artifactSpecMap[$this->artifact_name];
     }
 }
