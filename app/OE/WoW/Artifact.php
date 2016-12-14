@@ -40,7 +40,7 @@ class Artifact extends Model
         'Sharas\'dal, Scepter of Tides' => 'Restoration',
         'Ulthalesh, the Deadwind Harvester' => 'Affliction',
         'Skull of the Man\'ari' => 'Demonology',
-        'Scepter of Sargeras]' => 'Destruction',
+        'Scepter of Sargeras' => 'Destruction',
         'Strom\'kar, the Warbreaker' => 'Arms',
         'Warswords of the Valarjar' => 'Fury',
         'Scale of the Earth-Warder' => 'Protection',
