@@ -8,14 +8,14 @@
                 <table class="table table-striped" style="font-size: 1.1em;"  >
                     <tr>
                         <th>Player</th>
-                        <th>Artifact</th>
+                        <th>Spec</th>
                         <th>Rank</th>
                         <th>Artifact Item Level</th>
                     </tr>
                     @foreach( $artifacts as $artifact )
                         <tr style="color: #{{ $artifact->getColour() }}">
                             <td>{{ $artifact->member->character_name  }}</td>
-                            <td>{{ $artifact->artifact_name  }}</td>
+                            <td>{{ $artifact->getSpec()  }}</td>
                             <td>{{ $artifact->rank  }}</td>
                             <td>{{ $artifact->level  }}</td>
                         </tr>
