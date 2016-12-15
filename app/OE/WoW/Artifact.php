@@ -25,7 +25,7 @@ class Artifact extends Model
         'Ebonchill' => 'Frost',
         'Fu Zan, the Wanderer\'s Companion' => 'Brewmaster',
         'Sheilun, Staff of the Mists' => 'Mistweaver',
-        'Al\'burq' => 'Windwalker',
+        'Fists of the Heavens' => 'Windwalker',
         'The Silver Hand' => 'Holy',
         'Truthguard' => 'Protection',
         'Ashbringer' => 'Retribution',
