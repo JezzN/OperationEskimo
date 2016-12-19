@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <p>Operation Eskimo are offering boosts through raid/dungeon content in-exchange for in-game gold. If you are interested in this service please post on our forums or contact an officer in-game:
+    <p>Operation Eskimo are offering boosts through raid/dungeon content in-exchange for in-game gold. If you are interested in this service please post on our <a href="https://forums.operation-eskimo.com/t/boosting">forums</a> or contact an officer in-game:
         <ul>
             <li>Jezz#2287</li>
             <li>Meano#2997</li>
