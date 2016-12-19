@@ -25,7 +25,7 @@
             <td>Xavius (Mythic)</td>
             <td>Get your "the Dreamer" title and the "Cutting Edge: Xavius" achievement before it is no longer available in 7.1.5.</td>
             <td>No</td>
-            <td>1,000,000g</td>
+            <td>500,000g</td>
         </tr>
     </table>
 @stop
