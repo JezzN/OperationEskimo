@@ -16,4 +16,9 @@ class Discussion extends Model
     {
         return $this->belongsTo(User::class, 'start_user_id');
     }
+
+    public function url()
+    {
+        return config('operation-eskimo.forum-link') . 'd/' . $this->id . '-' . $this->slug;
+    }
 }

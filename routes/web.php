@@ -24,3 +24,4 @@ Route::get('/logs/averages', ['uses' => 'LogsController@averages', 'as' => 'logs
 Route::get('/logs/{character}', ['uses' => 'LogsController@character', 'as' => 'logs.character']);
 Route::get('/artifacts', ['uses' => 'ArtifactController@index', 'as' => "artifacts.index"]);
 Route::get('/boosts', 'BoostController@index');
+Route::get('/availability', 'AvailabilityController@index');

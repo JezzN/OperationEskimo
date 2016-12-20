@@ -16,6 +16,13 @@ class Post extends Model
 {
     protected $connection = 'forums';
 
+    public function scopeThatHasTag($query, $tagId)
+    {
+        return $query->whereHas('discussion.tags', function($q) use ($tagId) {
+            return $q->where('tag_id', $tagId);
+        });
+    }
+
     public function discussion()
     {
         return $this->belongsTo(Discussion::class);
