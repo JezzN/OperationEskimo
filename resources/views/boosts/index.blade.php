@@ -29,21 +29,21 @@
         </tr>
 
         <tr>
-            <td>Mythic+ Keystone 2-5</td>
+            <td>M+ Keystone 2-5</td>
             <td></td>
             <td>Personal</td>
             <td>75,000g per Dungeon</td>
         </tr>
 
         <tr>
-            <td>Mythic+ Keystone 6-9</td>
+            <td>M+ Keystone 6-9</td>
             <td></td>
             <td>Personal</td>
             <td>100,000g per Dungeon</td>
         </tr>
 
         <tr>
-            <td>Mythic+ Keystone 10+</td>
+            <td>M+ Keystone 10+</td>
             <td></td>
             <td>Personal</td>
             <td>150,000g per Dungeon</td>
@@ -51,7 +51,7 @@
 
 
         <tr>
-            <td>Mythic+ Keystone 12</td>
+            <td>M+ Keystone 12</td>
             <td>Completing for weekly chest.</td>
             <td>Personal</td>
             <td>200,000g per Dungeon</td>
