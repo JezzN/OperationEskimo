@@ -43,7 +43,7 @@
         </tr>
 
         <tr>
-            <td>M+ Keystone 10+</td>
+            <td>M+ Keystone 10-11</td>
             <td></td>
             <td>Personal</td>
             <td>150,000g per Dungeon</td>
