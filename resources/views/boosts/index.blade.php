@@ -61,7 +61,7 @@
             <td>Nightbane Mount</td>
             <td></td>
             <td>Personal</td>
-            <td>400,000g per Dungeon</td>
+            <td>400,000g</td>
         </tr>
     </table>
 @stop
