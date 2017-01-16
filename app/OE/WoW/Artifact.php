@@ -55,7 +55,7 @@ class Artifact extends Model
     {
         if( $this->offspec ) return 'CCCCCC';
 
-        if( $this->rank < 35 ) return 'E80505';
+        if( $this->rank < 40 ) return 'E80505';
 
         return '00BD06';
     }
