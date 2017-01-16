@@ -25,6 +25,10 @@ class ArtifactImporter
 
         $weapon = $character['items']['mainHand'];
 
+        if( empty($weapon['artifactTraits'])  ) {
+            $weapon = $character['items']['offHand'];
+        }
+
         if( empty($weapon['artifactTraits'])  ) return;
 
         $rank = $this->calculateRank($weapon);
