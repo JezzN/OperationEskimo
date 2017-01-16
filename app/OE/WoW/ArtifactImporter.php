@@ -25,7 +25,7 @@ class ArtifactImporter
 
         $weapon = $character['items']['mainHand'];
 
-        if( empty($weapon['artifactTraits'])  ) {
+        if( empty($weapon['artifactTraits']) && isset($character['items']['offHand'])  ) {
             $weapon = $character['items']['offHand'];
         }
 
