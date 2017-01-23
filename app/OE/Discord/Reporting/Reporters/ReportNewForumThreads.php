@@ -14,7 +14,7 @@ class ReportNewForumThreads extends AbstractDatabaseChangeReporter
    {
        $oeDiscord = OperationEskimoDiscord::forServer($discord);
 
-       $discussions = $this->getNewRecords(Discussion::where('is_approved', true));
+       $discussions = $this->getNewRecords(Discussion::where('is_approved', true)->whereNull('hide_time'));
 
        foreach( $discussions as $discussion ) {
            $message = $this->createMessage($discussion);
