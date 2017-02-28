@@ -23,6 +23,8 @@ class ArtifactImporter
     {
         $character = $this->client->characters()->on('Ragnaros')->find($member->character_name, ['items']);
 
+        if( ! isset($character['items']['mainHand']) ) return;
+
         $weapon = $character['items']['mainHand'];
 
         if( empty($weapon['artifactTraits']) && isset($character['items']['offHand'])  ) {
