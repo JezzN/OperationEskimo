@@ -106,6 +106,8 @@ class GuildLootDropsImporter
         foreach ($raiders as $raider) {
             $character = $this->characters->find($raider, ['feed']);
 
+            if( ! $character ) continue;
+
             foreach ($character->feed as $event) {
 
                 $event['character'] = $raider;
