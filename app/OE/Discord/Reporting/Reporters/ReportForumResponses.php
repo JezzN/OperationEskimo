@@ -32,6 +32,12 @@ class ReportForumResponses extends AbstractDatabaseChangeReporter
 
         $link = config('operation-eskimo.forum-link') . "d/{$discussion->id}-{$discussion->slug}";
 
-        return "{$username} responsed to **{$discussion->title}** (" . $link . ")";
+        $shortMessage = strip_tags($post->content);
+
+        if( strlen($shortMessage) > 100 ) {
+            $shortMessage = substr($shortMessage, 0, 100) . '...';
+        }
+
+        return "{$username} responsed to **{$discussion->title}** (" . $link . "): {$shortMessage}";
     }
 }
