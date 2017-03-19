@@ -29,6 +29,11 @@ class OperationEskimoDiscord
         return $this->sendMessage(config('operation-eskimo.discord-channel-officer'), $message);
     }
 
+    public function sendMessageToBossDiscussion($message)
+    {
+        return $this->sendMessage(config('operation-eskimo.discord-channel-boss-discussion'), $message);
+    }
+
     public function sendMessageToTestChat($message)
     {
         return $this->sendMessage(config('operation-eskimo.discord-channel-test'), $message);
