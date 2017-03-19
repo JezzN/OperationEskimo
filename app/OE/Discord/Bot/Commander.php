@@ -11,7 +11,6 @@ class Commander
     private $commands = [
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
-        'me' => PlayFile::class
     ];
 
     /**
