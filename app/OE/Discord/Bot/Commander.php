@@ -3,13 +3,15 @@ namespace App\OE\Discord\Bot;
 
 use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
+use App\OE\Discord\Bot\Commands\PlayFile;
 use Discord\Parts\Channel\Message;
 
 class Commander
 {
     private $commands = [
         'commands' => ListCommands::class,
-        'legendaries' => ListRecentLegendaryDrops::class
+        'legendaries' => ListRecentLegendaryDrops::class,
+        'me' => PlayFile::class
     ];
 
     /**

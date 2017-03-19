@@ -1,12 +1,13 @@
 <?php namespace App\OE\Discord\Bot;
 
+use Discord\Discord;
 use Discord\Parts\Channel\Message;
 
 abstract class Command
 {
     protected $description = '';
 
-    public abstract function execute(Message $message);
+    public abstract function execute(Message $message, Discord $discord);
 
     /**
      * Return the description of the command.

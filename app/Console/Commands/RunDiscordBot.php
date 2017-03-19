@@ -59,7 +59,7 @@ class RunDiscordBot extends Command
         });
 
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {
-            $this->commander->execute($message);
+            $this->commander->execute($message, $this->discord);
         });
 
         $this->discord->run();
