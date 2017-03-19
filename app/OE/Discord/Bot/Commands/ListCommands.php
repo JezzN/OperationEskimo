@@ -3,6 +3,7 @@ namespace App\OE\Discord\Bot\Commands;
 
 use App\OE\Discord\Bot\Command;
 use App\OE\Discord\Bot\Commander;
+use Discord\Discord;
 use Discord\Parts\Channel\Message;
 
 class ListCommands extends Command
@@ -23,7 +24,7 @@ class ListCommands extends Command
      * @author Jeremy
      * @param Message $message
      */
-    public function execute(Message $message)
+    public function execute(Message $message, Discord $discord)
     {
         $reply = "Command List:" . PHP_EOL . PHP_EOL;
 

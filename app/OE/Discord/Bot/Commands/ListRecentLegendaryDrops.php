@@ -4,13 +4,14 @@ namespace App\OE\Discord\Bot\Commands;
 use App\OE\Discord\Bot\Command;
 use App\OE\Loot\LootDrop;
 use Carbon\Carbon;
+use Discord\Discord;
 use Discord\Parts\Channel\Message;
 
 class ListRecentLegendaryDrops extends Command
 {
     protected $description = 'List recent legendary drops';
 
-    public function execute(Message $message)
+    public function execute(Message $message, Discord $discord)
     {
         $legendaries = LootDrop::where('quality', 5)->where('item_level', '>=', 895)->orderBy('loot_time', 'desc')->take(5)->get();
 
