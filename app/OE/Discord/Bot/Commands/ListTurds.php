@@ -18,6 +18,7 @@ class ListTurds extends Command
             'Haleena',
             'Daedalia'
         ];
+        shuffle($turds);
 
         $i = 1;
         foreach( $turds as $turd ) {
