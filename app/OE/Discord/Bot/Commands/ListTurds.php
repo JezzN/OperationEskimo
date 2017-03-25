@@ -6,6 +6,7 @@ use Discord\Parts\Channel\Message;
 
 class ListTurds extends Command
 {
+    protected $description = "List turds";
 
     public function execute(Message $message)
     {
