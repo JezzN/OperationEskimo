@@ -11,8 +11,9 @@ class ListRecentLegendaryDrops extends Command
 {
     protected $description = 'List recent legendary drops';
 
-    public function execute(Message $message, Discord $discord)
+    public function execute(Message $message)
     {
+        echo "in command";
         $legendaries = LootDrop::where('quality', 5)->where('item_level', '>=', 895)->orderBy('loot_time', 'desc')->take(5)->get();
 
         $reply = "Most recent legendaries are:" . PHP_EOL . PHP_EOL;

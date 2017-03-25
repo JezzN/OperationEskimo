@@ -38,6 +38,6 @@ class ReportForumResponses extends AbstractDatabaseChangeReporter
             $shortMessage = substr($shortMessage, 0, 100) . '...';
         }
 
-        return "{$username} responded to **{$discussion->title}** (" . $link . "): {$shortMessage}";
+        return "**{$username}** responded to **{$discussion->title}** (" . $link . "): {$shortMessage}";
     }
 }

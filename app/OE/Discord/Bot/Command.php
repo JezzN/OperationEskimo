@@ -7,7 +7,7 @@ abstract class Command
 {
     protected $description = '';
 
-    public abstract function execute(Message $message, Discord $discord);
+    public abstract function execute(Message $message);
 
     /**
      * Return the description of the command.

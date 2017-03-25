@@ -24,7 +24,7 @@ class ListCommands extends Command
      * @author Jeremy
      * @param Message $message
      */
-    public function execute(Message $message, Discord $discord)
+    public function execute(Message $message)
     {
         $reply = "Command List:" . PHP_EOL . PHP_EOL;
 
