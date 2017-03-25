@@ -10,6 +10,7 @@ class ListTurds extends Command
 
     public function execute(Message $message)
     {
+        echo "hi";
         $reply = "Turds are:" . PHP_EOL . PHP_EOL;
 
         $turds = [
@@ -23,5 +24,7 @@ class ListTurds extends Command
             $reply .= "#{$i} {$turd}" . PHP_EOL . PHP_EOL;
             $i++;
         }
+
+        $message->channel->sendMessage($reply);
     }
 }
