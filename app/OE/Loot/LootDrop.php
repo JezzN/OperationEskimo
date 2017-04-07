@@ -64,4 +64,9 @@ class LootDrop extends Model
 
         return 0;
     }
+
+    public function scopeLegendary($q)
+    {
+        return $q->where('quality', '=', 5)->where('item_level', '>=', 895);
+    }
 }
