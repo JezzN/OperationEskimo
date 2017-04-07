@@ -10,7 +10,6 @@ class ListTurds extends Command
 
     public function execute(Message $message)
     {
-        echo "hi";
         $reply = "Turds are:" . PHP_EOL . PHP_EOL;
 
         $turds = [
