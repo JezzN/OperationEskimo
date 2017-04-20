@@ -2,6 +2,9 @@
 table.recruitment {
   background-color: #2D2D35; }
 
+td.recruitment-open {
+  color: #d5d5d5; }
+
 td.recruitment-high {
   color: #ff420e; }
 

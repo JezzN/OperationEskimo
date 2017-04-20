@@ -15,7 +15,8 @@ class ListTurds extends Command
         $turds = [
             'Skuggmeester',
             'Haleena',
-            'Daedalia'
+            'Daedalia',
+            'Dadealius'
         ];
         shuffle($turds);
 
