@@ -12,7 +12,6 @@ class Commander
     private $commands = [
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
-        'turds' => ListTurds::class
     ];
 
     /**

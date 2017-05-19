@@ -9,6 +9,7 @@ use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ImportMmoChampionThreads;
 use App\Console\Commands\ImportWarcraftLogsRankings;
 use App\Console\Commands\ParseForumConfigurationThreads;
+use App\Console\Commands\ReadWarcraftLogs;
 use App\Console\Commands\RunDiscordBot;
 use App\Console\Commands\ReportNewThreads;
 use Illuminate\Console\Scheduling\Schedule;
