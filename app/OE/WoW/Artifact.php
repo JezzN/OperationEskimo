@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artifact extends Model
 {
+    const DANGER_ZONE = 66;
+
     protected $artifactSpecMap = [
         'Twinblades of the Deceiver' => 'Havoc',
         'Doomhammer' => 'Enhancement',
@@ -55,9 +57,14 @@ class Artifact extends Model
     {
         if( $this->offspec ) return 'CCCCCC';
 
-        if( $this->rank < 40 ) return 'E80505';
+        if( $this->isInDangerZone() ) return 'E80505';
 
         return '00BD06';
+    }
+
+    public function isInDangerZone()
+    {
+        return $this->rank < Artifact::DANGER_ZONE;
     }
 
     public function getSpec()

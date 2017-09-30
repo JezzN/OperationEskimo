@@ -21,10 +21,10 @@ class ArtifactController extends Controller
         return view('artifacts.index')->with('artifacts', $this->compiledArtifacts());
     }
 
-    private function compiledArtifacts()
+    public static function compiledArtifacts()
     {
         $artifacts = Artifact::whereHas('member', function($q) {
-            return $q->whereIn('rank', $this->operationEskimo->raiderRanks());
+            return $q->whereIn('rank', app(OperationEskimo::class)->raiderRanks());
         })->orderBy('rank', 'desc')->get();
 
         $counts = [];

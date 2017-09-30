@@ -1,6 +1,7 @@
 <?php
 namespace App\OE\Discord\Bot;
 
+use App\OE\Discord\Bot\Commands\Dangerzone;
 use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
@@ -12,6 +13,7 @@ class Commander
     private $commands = [
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
+        'dangerzone' => Dangerzone::class
     ];
 
     /**
