@@ -1,11 +1,11 @@
 <?php
 namespace App\OE\WoW;
 
+use App\OE\Configuration\Configuration;
 use Illuminate\Database\Eloquent\Model;
 
 class Artifact extends Model
 {
-    const DANGER_ZONE = 66;
 
     protected $artifactSpecMap = [
         'Twinblades of the Deceiver' => 'Havoc',
@@ -48,6 +48,12 @@ class Artifact extends Model
         'Scale of the Earth-Warder' => 'Protection',
     ];
 
+    public static function getDangerzone()
+    {
+        $config = Configuration::where('category', 'dangerzone')->first();
+        return $config->configuration['level'];
+    }
+
     public function member()
     {
         return $this->belongsTo(GuildMember::class, 'member_id');
@@ -64,7 +70,7 @@ class Artifact extends Model
 
     public function isInDangerZone()
     {
-        return $this->rank < Artifact::DANGER_ZONE;
+        return $this->rank < Artifact::getDangerzone();
     }
 
     public function getSpec()

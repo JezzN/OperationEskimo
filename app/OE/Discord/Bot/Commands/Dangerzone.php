@@ -2,6 +2,7 @@
 namespace App\OE\Discord\Bot\Commands;
 
 use App\Http\Controllers\ArtifactController;
+use App\OE\Configuration\Configuration;
 use App\OE\Configuration\RosterConfiguration;
 use App\OE\Discord\Bot\Command;
 use App\OE\OperationEskimo;
@@ -23,7 +24,13 @@ class Dangerzone extends Command
 
     public function execute(Message $message)
     {
-        $dangerzone = Artifact::DANGER_ZONE;
+        if( in_array($message->channel->name, ['officerchat', 'bottest']) ) {
+            if( trim($message->content) !== '!dangerzone' ) {
+                return $this->updateDangerzone($message);
+            }
+        }
+
+        $dangerzone = Artifact::getDangerzone();
 
         $reply = "Players in the danger zone (below {$dangerzone}) are:" . PHP_EOL . PHP_EOL;
 
@@ -37,5 +44,31 @@ class Dangerzone extends Command
 
 
         $message->channel->sendMessage($reply);
+    }
+
+    private function updateDangerzone(Message $message)
+    {
+        preg_match('/[0-9]{1,3}$/', $message->content, $matches);
+
+        if( empty($matches) ) {
+            return $this->invalidDangerzone($message);
+        }
+
+        $newDangerzone = $matches[0];
+
+        if( ! is_numeric($newDangerzone) ) {
+            return $this->invalidDangerzone($message);
+        }
+
+        $config = Configuration::where('category', 'dangerzone')->first();
+        $config->configuration = ['level' => (int) $newDangerzone];
+        $config->save();
+
+        $message->channel->sendMessage("Updated dangerzone to {$newDangerzone}");
+    }
+
+    protected function invalidDangerzone(Message $message)
+    {
+        return $message->channel->sendMessage("{$message->content} is not valid");
     }
 }
