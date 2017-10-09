@@ -48,6 +48,7 @@ class Dangerzone extends Command
 
     private function updateDangerzone(Message $message)
     {
+        $originalDangerzone = Artifact::getDangerzone();
         preg_match('/[0-9]{1,3}$/', $message->content, $matches);
 
         if( empty($matches) ) {
@@ -64,7 +65,7 @@ class Dangerzone extends Command
         $config->configuration = ['level' => (int) $newDangerzone];
         $config->save();
 
-        $message->channel->sendMessage("Updated dangerzone to {$newDangerzone}");
+        $message->channel->sendMessage("Danger zone has been changed from {$originalDangerzone} to {$newDangerzone}");
     }
 
     protected function invalidDangerzone(Message $message)
