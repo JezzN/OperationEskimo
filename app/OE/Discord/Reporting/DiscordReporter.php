@@ -3,6 +3,7 @@ namespace App\OE\Discord\Reporting;
 
 use App\OE\Discord\Reporting\Reporters\ReportForumResponses;
 use App\OE\Discord\Reporting\Reporters\ReportLegendaryDrops;
+use App\OE\Discord\Reporting\Reporters\ReportMythicChestItems;
 use App\OE\Discord\Reporting\Reporters\ReportNewForumThreads;
 use App\OE\Discord\Reporting\Reporters\ReportNewMmoChampionPosts;
 use App\OE\Discord\Reporting\Reporters\ReportRosterChanges;
@@ -16,7 +17,8 @@ class DiscordReporter
         ReportLegendaryDrops::class,
         ReportRosterChanges::class,
         ReportNewMmoChampionPosts::class,
-        ReportForumResponses::class
+        ReportForumResponses::class,
+        ReportMythicChestItems::class
     ];
 
     public function report(Discord $discord)
