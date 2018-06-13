@@ -6,6 +6,7 @@ use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
 use App\OE\Discord\Bot\Commands\PlayFile;
+use App\OE\Discord\Bot\Commands\Spot;
 use Discord\Parts\Channel\Message;
 
 class Commander
@@ -13,7 +14,8 @@ class Commander
     private $commands = [
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
-        'dangerzone' => Dangerzone::class
+        'dangerzone' => Dangerzone::class,
+        'spot' => Spot::class
     ];
 
     /**
