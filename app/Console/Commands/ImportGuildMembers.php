@@ -39,10 +39,9 @@ class ImportGuildMembers extends Command
      *
      * @return void
      */
-    public function __construct(OeGuildApiResponse $oe, ItemLevelFetcher $itemLevelFetcher, ArtifactImporter $artifactImporter)
+    public function __construct(ItemLevelFetcher $itemLevelFetcher, ArtifactImporter $artifactImporter)
     {
         parent::__construct();
-        $this->oe = $oe;
         $this->itemLevelFetcher = $itemLevelFetcher;
         $this->artifactImporter = $artifactImporter;
     }
@@ -54,6 +53,8 @@ class ImportGuildMembers extends Command
      */
     public function handle()
     {
+        $this->oe = app(OeGuildApiResponse::class);
+
         $guildMembers = new Collection();
 
         foreach(  $this->oe->allMembers() as $member )

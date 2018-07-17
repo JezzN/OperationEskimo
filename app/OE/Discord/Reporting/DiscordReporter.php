@@ -8,6 +8,7 @@ use App\OE\Discord\Reporting\Reporters\ReportNewForumThreads;
 use App\OE\Discord\Reporting\Reporters\ReportNewMmoChampionPosts;
 use App\OE\Discord\Reporting\Reporters\ReportRosterChanges;
 use App\OE\Discord\Reporting\Reporters\ReportWarcraftLogRankings;
+use App\OE\Discord\Reporting\Reporters\ReportWowProgressRecruitment;
 use Discord\Discord;
 
 class DiscordReporter
@@ -18,7 +19,8 @@ class DiscordReporter
         ReportRosterChanges::class,
         ReportNewMmoChampionPosts::class,
         ReportForumResponses::class,
-        ReportMythicChestItems::class
+        ReportMythicChestItems::class,
+        ReportWowProgressRecruitment::class
     ];
 
     public function report(Discord $discord)

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckWoWProgressRecruitment;
 use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         RunDiscordBot::class,
         ImportGuildMembers::class,
         ImportMmoChampionThreads::class,
+        CheckWoWProgressRecruitment::class
     ];
 
     /**
