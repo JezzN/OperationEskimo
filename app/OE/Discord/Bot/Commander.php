@@ -5,8 +5,10 @@ use App\OE\Discord\Bot\Commands\Dangerzone;
 use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
+use App\OE\Discord\Bot\Commands\Nor;
 use App\OE\Discord\Bot\Commands\PlayFile;
 use App\OE\Discord\Bot\Commands\Spot;
+use App\OE\Discord\Bot\Commands\Svampjuggen;
 use App\OE\Discord\Bot\Commands\Trials;
 use Discord\Parts\Channel\Message;
 
@@ -17,7 +19,9 @@ class Commander
         'legendaries' => ListRecentLegendaryDrops::class,
         'dangerzone' => Dangerzone::class,
         'spot' => Spot::class,
-        'trials' => Trials::class
+        'trials' => Trials::class,
+        'nor' => Nor::class,
+        'bssnies' => Svampjuggen::class
     ];
 
     /**
