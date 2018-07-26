@@ -1,6 +1,7 @@
 <?php
 namespace App\OE\Discord\Reporting;
 
+use App\OE\Discord\Reporting\Reporters\ReportBluePosts;
 use App\OE\Discord\Reporting\Reporters\ReportForumResponses;
 use App\OE\Discord\Reporting\Reporters\ReportLegendaryDrops;
 use App\OE\Discord\Reporting\Reporters\ReportMythicChestItems;
@@ -20,7 +21,8 @@ class DiscordReporter
         ReportNewMmoChampionPosts::class,
         ReportForumResponses::class,
         ReportMythicChestItems::class,
-        ReportWowProgressRecruitment::class
+        ReportWowProgressRecruitment::class,
+        ReportBluePosts::class
     ];
 
     public function report(Discord $discord)
