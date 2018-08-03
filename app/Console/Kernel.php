@@ -6,6 +6,7 @@ use App\Console\Commands\CheckWoWProgressRecruitment;
 use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
+use App\Console\Commands\ImportBluePosts;
 use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ImportMmoChampionThreads;
 use App\Console\Commands\ImportWarcraftLogsRankings;
@@ -29,7 +30,8 @@ class Kernel extends ConsoleKernel
         RunDiscordBot::class,
         ImportGuildMembers::class,
         ImportMmoChampionThreads::class,
-        CheckWoWProgressRecruitment::class
+        CheckWoWProgressRecruitment::class,
+        ImportBluePosts::class
     ];
 
     /**
