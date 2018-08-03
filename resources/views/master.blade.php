@@ -10,7 +10,9 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="/css/app.css">
-
+    <link rel="icon"
+          type="image/png"
+          href="https://forums.operation-eskimo.com/assets/{{$favicon}}">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,600">
 <style></style>
 </head>
