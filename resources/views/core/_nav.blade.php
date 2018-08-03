@@ -14,9 +14,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <p class="navbar-text navbar-title"><a href="https://forums.operation-eskimo.com">Operation Eskimo</a></p>
+                <li><a href="https://forums.operation-eskimo.com"><img src="https://forums.operation-eskimo.com/assets/{{$logo}}" style="max-height: 30px; vertical-align: middle;"/></a></li>
                 @foreach( $links as $link )
-                    <li>
+                    <li style="padding-top: 3px;">
                         <a class="nav-link" {{ $link->is_newtab ? 'target="_blank"' : '' }} href="{{ $link->url }}" title="{{ $link->title }}">{{ $link->title }}</a>
                     </li>
                 @endforeach

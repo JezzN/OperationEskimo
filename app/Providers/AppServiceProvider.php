@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\OE\Forum\Link;
+use App\OE\Forum\Setting;
 use Discord\Discord;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('links', Link::orderBy('position')->get());
+        View::share('logo', Setting::where('key', 'logo_path')->first()->value);
+        View::share('favicon', Setting::where('key', 'favicon_path')->first()->value);
     }
 
     /**
