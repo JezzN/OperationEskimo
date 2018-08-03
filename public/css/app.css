@@ -111,7 +111,10 @@ div.container-navbar-fluid {
   padding-left: 0; }
 
 div.news-item img {
-  max-width: 100%; }
+  max-width: 100%;
+  border: 2px solid #2D2D35;
+  border-radius: 5px;
+  margin-top: 20px; }
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)

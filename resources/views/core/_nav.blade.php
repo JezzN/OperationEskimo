@@ -21,6 +21,7 @@
                     </li>
                 @endforeach
             </ul>
+
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
         </div>

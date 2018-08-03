@@ -1,5 +1,7 @@
+<div style=" background: #2D2D35; border-radius: 5px 5px 0 0; padding: 10px; text-align: center; margin-bottom:5px;">
+    <img src="img/logo_full.png" style="max-height: 100px;">
+</div>
 <div class="recruitment">
-    <h3>Recruitment</h3>
     @if( !empty($recruitment) )
         <table class="table recruitment" >
             @foreach( $recruitment as $position )
