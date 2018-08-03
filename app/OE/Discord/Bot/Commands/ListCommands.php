@@ -34,6 +34,10 @@ class ListCommands extends Command
             $reply .= "**!{$commandName}** - {$description}" . PHP_EOL;
         }
 
+        foreach (SimpleCommand::whereNotNull('id')->get() as $simpleCommand) {
+            $reply .= "**!{$simpleCommand->name}**" . PHP_EOL;
+        }
+
         $message->channel->sendMessage($reply);
     }
 }

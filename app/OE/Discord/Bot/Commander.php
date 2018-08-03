@@ -7,6 +7,7 @@ use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
 use App\OE\Discord\Bot\Commands\Nor;
 use App\OE\Discord\Bot\Commands\PlayFile;
+use App\OE\Discord\Bot\Commands\SimpleCommand;
 use App\OE\Discord\Bot\Commands\Spot;
 use App\OE\Discord\Bot\Commands\Svampjuggen;
 use App\OE\Discord\Bot\Commands\Trials;
@@ -18,10 +19,7 @@ class Commander
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
         'dangerzone' => Dangerzone::class,
-        'spot' => Spot::class,
-        'trials' => Trials::class,
-        'nor' => Nor::class,
-        'bssnies' => Svampjuggen::class
+        'trials' => Trials::class
     ];
 
     /**
@@ -36,11 +34,21 @@ class Commander
 
         $command = $this->extractCommandName($message);
 
-        if( ! $this->commandExists($command) ) return;
+        if( ! $this->commandExists($command) ) {
+            $simpleCommand = $this->findSimpleCommand($command);
+
+            if ($simpleCommand) {
+                $message->channel->sendMessage($simpleCommand->response);
+            }
+            return;
+        }
 
         return $this->resolveCommand($command)->execute($message);
     }
 
+    private function findSimpleCommand($name) {
+        return SimpleCommand::where('name', $name)->first();
+    }
     /**
      * Extract the name of the command from the message content.
      *
