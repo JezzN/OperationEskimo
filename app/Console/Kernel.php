@@ -7,6 +7,7 @@ use App\Console\Commands\GuildLootImport;
 use App\Console\Commands\GuildItemLevelUpdate;
 use App\Console\Commands\GuildMemberCheck;
 use App\Console\Commands\ImportBluePosts;
+use App\Console\Commands\ImportCharacterRep;
 use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ImportMmoChampionThreads;
 use App\Console\Commands\ImportRecruitmentFromWowProgress;
@@ -33,7 +34,8 @@ class Kernel extends ConsoleKernel
         ImportMmoChampionThreads::class,
         CheckWoWProgressRecruitment::class,
         ImportBluePosts::class,
-        ImportRecruitmentFromWowProgress::class
+        ImportRecruitmentFromWowProgress::class,
+        ImportCharacterRep::class
     ];
 
     /**
