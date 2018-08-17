@@ -31,19 +31,16 @@ class ImportGuildMembers extends Command
     private $oe;
     /** @var ItemLevelFetcher */
     private $itemLevelFetcher;
-    /** @var ArtifactImporter */
-    private $artifactImporter;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(ItemLevelFetcher $itemLevelFetcher, ArtifactImporter $artifactImporter)
+    public function __construct(ItemLevelFetcher $itemLevelFetcher)
     {
         parent::__construct();
         $this->itemLevelFetcher = $itemLevelFetcher;
-        $this->artifactImporter = $artifactImporter;
     }
 
     /**
@@ -91,8 +88,6 @@ class ImportGuildMembers extends Command
         }
 
         $member->save();
-
-        $this->artifactImporter->importArtifactFor($member);
 
         return $member;
     }
