@@ -7,6 +7,7 @@ use App\OE\Configuration\RosterConfiguration;
 use App\OE\Discord\Bot\Command;
 use App\OE\OperationEskimo;
 use App\OE\WoW\Artifact;
+use App\OE\WoW\HeartOfAzeroth;
 use Discord\Parts\Channel\Message;
 
 class Dangerzone extends Command
@@ -30,16 +31,16 @@ class Dangerzone extends Command
             }
         }
 
-        $dangerzone = Artifact::getDangerzone();
+        $dangerzone = Configuration::where('category', 'dangerzone')->first()->configuration['level'];
 
         $reply = "Players in the danger zone (below {$dangerzone}) are:" . PHP_EOL . PHP_EOL;
 
-        foreach( ArtifactController::compiledArtifacts() as $artifact ) {
+        foreach( HeartOfAzeroth::all() as $artifact ) {
 
-            if( ! $artifact->isInDangerZone() || $artifact->offspec || in_array(strtolower($artifact->member->character_name), $this->configuration->getExcluded()) ) continue;
+            if( $artifact->level >= $dangerzone || in_array(strtolower($artifact->character_name), $this->configuration->getExcluded()) ) continue;
 
 
-            $reply .= "**{$artifact->member->character_name} ({$artifact->getSpec()})** is rank {$artifact->rank}" . PHP_EOL . PHP_EOL;
+            $reply .= "**{$artifact->character_name}** is rank {$artifact->level}" . PHP_EOL . PHP_EOL;
         }
 
 
@@ -48,7 +49,7 @@ class Dangerzone extends Command
 
     private function updateDangerzone(Message $message)
     {
-        $originalDangerzone = Artifact::getDangerzone();
+        $originalDangerzone = Configuration::where('category', 'dangerzone')->first()->configuration['level'];
         preg_match('/[0-9]{1,3}$/', $message->content, $matches);
 
         if( empty($matches) ) {

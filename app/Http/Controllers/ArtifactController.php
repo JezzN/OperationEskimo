@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OE\OperationEskimo;
 use App\OE\WoW\Artifact;
+use App\OE\WoW\HeartOfAzeroth;
 use Illuminate\Http\Request;
 
 class ArtifactController extends Controller
@@ -18,28 +19,7 @@ class ArtifactController extends Controller
 
     public function index()
     {
-        return view('artifacts.index')->with('artifacts', $this->compiledArtifacts());
+        return view('artifacts.index')->with('artifacts', HeartOfAzeroth::orderBy('level', 'desc')->orderBy('experience', 'desc')->get());
     }
 
-    public static function compiledArtifacts()
-    {
-        $artifacts = Artifact::whereHas('member', function($q) {
-            return $q->whereIn('rank', app(OperationEskimo::class)->raiderRanks());
-        })->orderBy('rank', 'desc')->get();
-
-        $counts = [];
-
-        foreach( $artifacts as $artifact ) {
-
-            $artifact->offspec = false;
-
-            if( ! isset($counts[$artifact->member_id]) ) $counts[$artifact->member_id] = 0;
-
-            $counts[$artifact->member_id]++;
-
-            if( $counts[$artifact->member_id] > 1 ) $artifact->offspec = true;
-        }
-
-        return $artifacts;
-    }
 }

@@ -3,21 +3,19 @@
 @section('loot-content')
     <div class="row">
         <div class="col-md-12">
-            <h3>Artifact Rankings</h3>
+            <h3>Heart of Azeroth</h3>
             <div class="table-responsive">
                 <table class="table table-striped" style="font-size: 1.1em;"  >
                     <tr>
                         <th>Player</th>
-                        <th>Spec</th>
-                        <th>Rank</th>
-                        <th>Artifact Item Level</th>
+                        <th>Level</th>
                     </tr>
                     @foreach( $artifacts as $artifact )
-                        <tr style="color: #{{ $artifact->getColour() }}">
-                            <td>{{ $artifact->member->character_name  }}</td>
-                            <td>{{ $artifact->getSpec()  }}</td>
-                            <td>{{ $artifact->rank  }}</td>
-                            <td>{{ $artifact->level  }}</td>
+                        <tr>
+                            <td>{{ $artifact->character_name  }}</td>
+                            <td>{{ $artifact->level  }}
+                                <progress value="{{ $artifact->experience  }}" max="{{ $artifact->experience_remaining }}"></progress>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
