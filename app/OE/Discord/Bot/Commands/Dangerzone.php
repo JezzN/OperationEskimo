@@ -35,7 +35,7 @@ class Dangerzone extends Command
 
         $reply = "Players in the danger zone (below {$dangerzone}) are:" . PHP_EOL . PHP_EOL;
 
-        foreach( HeartOfAzeroth::all() as $artifact ) {
+        foreach( HeartOfAzeroth::orderBy('level', 'desc')->orderBy('experience', 'desc')->get() as $artifact ) {
 
             if( $artifact->level >= $dangerzone || in_array(strtolower($artifact->character_name), $this->configuration->getExcluded()) ) continue;
 
