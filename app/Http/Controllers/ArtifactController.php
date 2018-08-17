@@ -22,11 +22,17 @@ class ArtifactController extends Controller
     {
         $hearts =  HeartOfAzeroth::orderBy('level', 'desc')->orderBy('experience', 'desc')->get();
 
-        $championsRep = CharacterRep::orderBy('standing', 'desc')->orderBy('value', 'desc')->where('reputation_name', 'Champions of Azeroth')->get();
+        return view('artifacts.index')->with('artifacts', $hearts)
+            ->with('champions', $this->getRepByName('Champions of Azeroth'))
+            ->with('honorbound', $this->getRepByName('The Honorbound'))
+            ->with('voldunai', $this->getRepByName('Voldunai'))
+            ->with('zandalari', $this->getRepByName('Zandalari Empire'))
+            ->with('talanjis', $this->getRepByName('Talanji\'s Expedition'))
+            ->with('tortollan', $this->getRepByName('Tortollan Seekers'));
+    }
 
-        $honorboundRep = CharacterRep::orderBy('standing', 'desc')->orderBy('value', 'desc')->where('reputation_name', 'The Honorbound')->get();
-
-        return view('artifacts.index')->with('artifacts', $hearts)->with('champions', $championsRep)->with('honorbound', $honorboundRep);
+    private function getRepByName($name) {
+        return CharacterRep::orderBy('standing', 'desc')->orderBy('value', 'desc')->where('reputation_name', $name)->get();
     }
 
 }

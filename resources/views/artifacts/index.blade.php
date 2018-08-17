@@ -28,47 +28,31 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Champions of Azeroth</h3>
-            <div class="table-responsive">
-                <table class="table table-striped" style="font-size: 1.1em;"  >
-                    <tr>
-                        <th>Player</th>
-                        <th>Standing</th>
-                        <th>Progress</th>
-                    </tr>
-                    @foreach( $champions as $rep )
-                        <tr>
-                            <td>{{ $rep->character_name  }}</td>
-                            <td>{{ $rep->getStanding()  }}</td>
-                            <td>{{ $rep->value  }} / {{ $rep->max }}
-                                <progress value="{{ $rep->value  }}" max="{{ $rep->max }}"></progress>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
+            @include('loot._reputation', ['name' => 'Champions of Azeroth', 'reputations' => $champions])
         </div>
 
         <div class="col-md-6">
-            <h3>The Honorbound</h3>
-            <div class="table-responsive">
-                <table class="table table-striped" style="font-size: 1.1em;"  >
-                    <tr>
-                        <th>Player</th>
-                        <th>Standing</th>
-                        <th>Progress</th>
-                    </tr>
-                    @foreach( $honorbound as $rep )
-                        <tr>
-                            <td>{{ $rep->character_name  }}</td>
-                            <td>{{ $rep->getStanding()  }}</td>
-                            <td>{{ $rep->value  }} / {{ $rep->max }}
-                                <progress value="{{ $rep->value  }}" max="{{ $rep->max }}"></progress>
-                            </td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
+            @include('loot._reputation', ['name' => 'The Honorbound', 'reputations' => $honorbound])
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @include('loot._reputation', ['name' => 'Voldunai', 'reputations' => $voldunai])
+        </div>
+
+        <div class="col-md-6">
+            @include('loot._reputation', ['name' => 'Zandalari Empire', 'reputations' => $zandalari])
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @include('loot._reputation', ['name' => 'Talanji\'s Expedition', 'reputations' => $talanjis])
+        </div>
+
+        <div class="col-md-6">
+            @include('loot._reputation', ['name' => 'Tortollan Seekers', 'reputations' => $tortollan])
         </div>
     </div>
 
