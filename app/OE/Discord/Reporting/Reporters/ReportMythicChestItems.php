@@ -5,6 +5,7 @@ use App\OE\Discord\OperationEskimoDiscord;
 use App\OE\Discord\Reporting\AbstractDatabaseChangeReporter;
 use App\OE\Loot\LootDrop;
 use App\OE\mo;
+use App\OE\OperationEskimo;
 use Carbon\Carbon;
 use Discord\Discord;
 use Illuminate\Database\DatabaseManager;
