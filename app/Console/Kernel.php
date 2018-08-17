@@ -9,6 +9,7 @@ use App\Console\Commands\GuildMemberCheck;
 use App\Console\Commands\ImportBluePosts;
 use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ImportMmoChampionThreads;
+use App\Console\Commands\ImportRecruitmentFromWowProgress;
 use App\Console\Commands\ImportWarcraftLogsRankings;
 use App\Console\Commands\ParseForumConfigurationThreads;
 use App\Console\Commands\ReadWarcraftLogs;
@@ -31,7 +32,8 @@ class Kernel extends ConsoleKernel
         ImportGuildMembers::class,
         ImportMmoChampionThreads::class,
         CheckWoWProgressRecruitment::class,
-        ImportBluePosts::class
+        ImportBluePosts::class,
+        ImportRecruitmentFromWowProgress::class
     ];
 
     /**
