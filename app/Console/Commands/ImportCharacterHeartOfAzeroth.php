@@ -69,5 +69,11 @@ class ImportCharacterHeartOfAzeroth extends Command
             $heartDb->experience_remaining = $heart['azeriteItem']['azeriteExperienceRemaining'];
             $heartDb->save();
         }
+
+        foreach (HeartOfAzeroth::all() as $heart) {
+            if(!$this->operationEskimo->raiders()->pluck('character_name')->contains($heart->character_name)) {
+                $heart->delete();
+            }
+        }
     }
 }

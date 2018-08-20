@@ -64,5 +64,11 @@ class ImportCharacterRep extends Command
                 $characterReputation->save();
             }
         }
+
+        foreach (CharacterRep::all() as $characterRep) {
+            if(!$this->operationEskimo->raiders()->pluck('character_name')->contains($characterRep->character_name)) {
+                $characterRep->delete();
+            }
+        }
     }
 }

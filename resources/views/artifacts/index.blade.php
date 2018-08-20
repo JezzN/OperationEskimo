@@ -8,13 +8,11 @@
                 <table class="table table-striped" style="font-size: 1.1em;"  >
                     <tr>
                         <th>Player</th>
-                        <th>Item Level</th>
                         <th>Level</th>
                     </tr>
                     @foreach( $artifacts as $artifact )
                         <tr>
                             <td>{{ $artifact->character_name  }}</td>
-                            <td>{{ $artifact->character->average_item_level  }}</td>
                             <td>{{ $artifact->level  }}
                                 <progress value="{{ $artifact->experience  }}" max="{{ $artifact->experience_remaining }}"></progress>
                             </td>
