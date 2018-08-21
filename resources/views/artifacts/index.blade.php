@@ -33,7 +33,7 @@
                     @foreach( $raiders as $raider )
                         <tr>
                             <td>{{ $raider->character_name  }}</td>
-                            <td>{{ $raider->average_item_level  }}</td>
+                            <td>{{ $raider->average_item_level_equipped  }}</td>
                         </tr>
                     @endforeach
                 </table>

@@ -29,7 +29,7 @@ class ArtifactController extends Controller
             ->with('zandalari', $this->getRepByName('Zandalari Empire'))
             ->with('talanjis', $this->getRepByName('Talanji\'s Expedition'))
             ->with('tortollan', $this->getRepByName('Tortollan Seekers'))
-            ->with('raiders', $this->operationEskimo->raiders()->sortByDesc('average_item_level'));
+            ->with('raiders', $this->operationEskimo->raiders()->sortByDesc('average_item_level_equipped'));
     }
 
     private function getRepByName($name) {
