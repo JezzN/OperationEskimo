@@ -65,7 +65,7 @@ class LootStats
         return array_diff($this->raiders, $hasCache);
     }
 
-    private function thisWeek()
+    public function thisWeek()
     {
         return [
             $from = Carbon::now()->dayOfWeek == Carbon::WEDNESDAY ? new Carbon("wednesday") : new Carbon("last wednesday"),

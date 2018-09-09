@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\OE\Forum\Link;
 use App\OE\Loot\LootDrop;
 use App\OE\Loot\LootStats;
+use App\OE\WoW\MythicPlusCompletion;
 use Carbon\Carbon;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
@@ -41,9 +42,43 @@ class LootController extends Controller
 
     public function mythicPlus()
     {
+        $completionsThisReset = $this->flattenCompletions(MythicPlusCompletion::whereBetween('created_at', $this->lootStats->thisWeek())->where('is_initial_recording', false)->get());
+        $completionsThisMonth =  $this->flattenCompletions(MythicPlusCompletion::whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])->where('is_initial_recording', false)->get());
+        $completionsAllTime =  $this->flattenCompletions(MythicPlusCompletion::where('is_initial_recording', false)->get());
+
         return view('loot.mythic-plus')
-            ->with('mythicPlusLooters', $this->lootStats->mythicPlusLootCount())
-            ->with('start', LootDrop::orderBy('loot_time', 'asc')->first());
+            ->with('completionsThisReset', $completionsThisReset)
+            ->with('completionsThisMonth', $completionsThisMonth)
+            ->with('completionsAllTime', $completionsAllTime);
+    }
+
+    private function flattenCompletions($completions) {
+        $result = [];
+
+        foreach ($completions as $completion) {
+            if ($completion->is_initial_recording) continue;
+            if (!array_key_exists($completion->character_name, $result)) {
+                $result[$completion->character_name] = [];
+                $result[$completion->character_name]['plus_2'] = 0;
+                $result[$completion->character_name]['plus_5'] = 0;
+                $result[$completion->character_name]['plus_10'] = 0;
+                $result[$completion->character_name]['plus_15'] = 0;
+            }
+
+            $result[$completion->character_name]['plus_2'] += $completion->plus_2;
+            $result[$completion->character_name]['plus_5'] += $completion->plus_5;
+            $result[$completion->character_name]['plus_10'] += $completion->plus_10;
+            $result[$completion->character_name]['plus_15'] += $completion->plus_15;
+        }
+
+        foreach ($result as $i => $r) {
+            $result[$i]['total'] = $result[$i]['plus_2'];
+            $result[$i]['plus_2'] = ($result[$i]['plus_2'] - $result[$i]['plus_15'] - $result[$i]['plus_10'] - $result[$i]['plus_5']);
+            $result[$i]['plus_5'] = ($result[$i]['plus_5'] - $result[$i]['plus_15'] - $result[$i]['plus_10']);
+            $result[$i]['plus_10'] = ($result[$i]['plus_10'] - $result[$i]['plus_15']);
+        }
+
+        return collect($result)->sortByDesc('total');
     }
 
     public function mythicPlusCache()
