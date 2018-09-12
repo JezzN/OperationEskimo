@@ -11,7 +11,7 @@ abstract class AbstractDatabaseChangeReporter
     private $db;
 
     /** @var int The maximum number of records to retreive at a time before deciding that the tracking has broken and to show nothing */
-    protected $maxRecords = 5;
+    protected $maxRecords = 20;
 
     public function __construct(DatabaseManager $db)
     {
