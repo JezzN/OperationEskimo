@@ -9,6 +9,7 @@ return [
     'discord-channel-officer' => '233640477751115776',
     'discord-channel-test' => '366835803349057548',
     'discord-channel-boss-discussion' => '284683079325581322',
+    'discord-channel-logs' => '488664039338016768',
     'ranks' => [
         1 => 'Guild Master',
         2 => 'Officer',

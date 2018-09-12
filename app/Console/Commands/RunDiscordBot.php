@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\OE\Discord\Bot\Commander;
 use App\OE\Discord\Reporting\DiscordReporter;
+use App\OE\Discord\Utility\StartWipeFestBot;
 use App\OE\Forum\Discussion;
 use Discord\Discord;
 use Discord\WebSockets\Event;
@@ -35,16 +36,21 @@ class RunDiscordBot extends Command
 
     /** @var DiscordReporter */
     private $reporter;
+    /**
+     * @var StartWipeFestBot
+     */
+    private $startWipeFestBot;
 
     /**
      * ReportNewForumThreadsToDiscord constructor.
      */
-    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter)
+    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot)
     {
         parent::__construct();
         $this->discord = $discord;
         $this->commander = $commander;
         $this->reporter = $reporter;
+        $this->startWipeFestBot = $startWipeFestBot;
     }
 
     /**
@@ -59,6 +65,7 @@ class RunDiscordBot extends Command
         });
 
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {
+            $this->startWipeFestBot->start($message);
             $this->commander->execute($message, $this->discord);
         });
 
