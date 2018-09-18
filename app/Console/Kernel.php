@@ -12,6 +12,8 @@ use App\Console\Commands\ImportCharacterRep;
 use App\Console\Commands\ImportGuildMembers;
 use App\Console\Commands\ImportMmoChampionThreads;
 use App\Console\Commands\ImportMythicPlusCompletions;
+use App\Console\Commands\ImportMythicPlusLeaderboards;
+use App\Console\Commands\ImportRealmStatus;
 use App\Console\Commands\ImportRecruitmentFromWowProgress;
 use App\Console\Commands\ImportWarcraftLogsRankings;
 use App\Console\Commands\ParseForumConfigurationThreads;
@@ -39,7 +41,9 @@ class Kernel extends ConsoleKernel
         ImportRecruitmentFromWowProgress::class,
         ImportCharacterRep::class,
         ImportCharacterHeartOfAzeroth::class,
-        ImportMythicPlusCompletions::class
+        ImportMythicPlusCompletions::class,
+        ImportRealmStatus::class,
+        ImportMythicPlusLeaderboards::class
     ];
 
     /**
