@@ -5,6 +5,7 @@ use App\OE\Discord\Bot\Commands\Dangerzone;
 use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
+use App\OE\Discord\Bot\Commands\MythicPlus;
 use App\OE\Discord\Bot\Commands\Nor;
 use App\OE\Discord\Bot\Commands\PlayFile;
 use App\OE\Discord\Bot\Commands\SimpleCommand;
@@ -19,7 +20,8 @@ class Commander
         'commands' => ListCommands::class,
         'legendaries' => ListRecentLegendaryDrops::class,
         'dangerzone' => Dangerzone::class,
-        'trials' => Trials::class
+        'trials' => Trials::class,
+        'mythicplus' => MythicPlus::class
     ];
 
     /**
