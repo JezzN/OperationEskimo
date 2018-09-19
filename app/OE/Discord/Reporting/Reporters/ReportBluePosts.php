@@ -14,6 +14,7 @@ use App\OE\Discord\OperationEskimoDiscord;
 use App\OE\Discord\Reporting\AbstractDatabaseChangeReporter;
 use Carbon\Carbon;
 use Discord\Discord;
+use GuzzleHttp\Client;
 
 class ReportBluePosts extends AbstractDatabaseChangeReporter
 {
@@ -25,7 +26,17 @@ class ReportBluePosts extends AbstractDatabaseChangeReporter
 
         foreach( $items as $item ) {
             $link = $item->getLink();
+
+            if (!$this->isActiveLink($link)) continue;
+
             $oeDiscord->sendMessageToGeneralChat("*{$item->title}* ({$link})");
         }
+    }
+
+    private function isActiveLink($url) {
+
+        $client = new Client();
+
+        return $client->get($url)->getStatusCode() == 200;
     }
 }
