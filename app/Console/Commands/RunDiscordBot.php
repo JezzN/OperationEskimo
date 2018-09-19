@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use App\OE\Discord\Bot\Commander;
+use App\OE\Discord\Bot\Commands\MythicPlus;
+use App\OE\Discord\OperationEskimoDiscord;
 use App\OE\Discord\Reporting\DiscordReporter;
 use App\OE\Discord\Utility\StartWipeFestBot;
 use App\OE\Forum\Discussion;
+use Carbon\Carbon;
 use Discord\Discord;
 use Discord\WebSockets\Event;
 use Illuminate\Cache\Repository;
@@ -40,17 +43,22 @@ class RunDiscordBot extends Command
      * @var StartWipeFestBot
      */
     private $startWipeFestBot;
+    /**
+     * @var MythicPlus
+     */
+    private $mythicPlus;
 
     /**
      * ReportNewForumThreadsToDiscord constructor.
      */
-    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot)
+    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot, MythicPlus $mythicPlus)
     {
         parent::__construct();
         $this->discord = $discord;
         $this->commander = $commander;
         $this->reporter = $reporter;
         $this->startWipeFestBot = $startWipeFestBot;
+        $this->mythicPlus = $mythicPlus;
     }
 
     /**
@@ -62,6 +70,14 @@ class RunDiscordBot extends Command
     {
         $this->discord->loop->addPeriodicTimer(10, function() {
             $this->reporter->report($this->discord);
+        });
+
+        $this->discord->loop->addPeriodicTimer(60, function() {
+            $now = Carbon::now()->setTimezone("Europe/Paris");
+
+            if ($now->dayOfWeek == Carbon::TUESDAY && $now->hour == 9 && $now->minute == 17) {
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToGeneralChat($this->mythicPlus->generateMessage());
+            }
         });
 
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {

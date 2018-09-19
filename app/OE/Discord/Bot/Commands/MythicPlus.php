@@ -23,6 +23,10 @@ class MythicPlus extends Command
 
     public function execute(Message $message)
     {
+        $message->channel->sendMessage($this->generateMessage());
+    }
+
+    public function generateMessage() {
         $completed = MythicLeaderboard::whereBetween('completed_at', $this->lootStats->thisWeek())->where('keystone_level', '>=', 10)->get()->pluck('character_name')->unique()->sort();
 
         $notCompleted = $this->operationEskimo->raiders()->pluck('character_name')->diff($completed)->sort();
@@ -39,7 +43,7 @@ class MythicPlus extends Command
             $this->addPlayerToReply($complete, $reply);
         }
 
-        $message->channel->sendMessage($reply);
+        return $reply;
     }
 
     private function addPlayerToReply($player, &$reply)
