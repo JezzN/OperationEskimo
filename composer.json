@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "pwnraid/bnet": "^0.1.1",
         "predis/predis": "^1.1",
-        "team-reflex/discord-php": "^4.0"
+        "team-reflex/discord-php": "^4.0",
+        "boo/bnet": "^0.1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

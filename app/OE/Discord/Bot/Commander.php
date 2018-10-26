@@ -41,7 +41,12 @@ class Commander
 
             if ($simpleCommand) {
                 $message->channel->sendMessage($simpleCommand->response);
+            } else {
+                if ($message->channel->id == '471923279507226624') {
+                    $this->addSimpleCommand($message, $command);
+                }
             }
+
             return;
         }
 
@@ -110,5 +115,26 @@ class Commander
     public function commandExists($command)
     {
         return isset($this->getCommands()[$command]);
+    }
+
+    private function addSimpleCommand(Message $message)
+    {
+        preg_match("/(![^ ]+) (.+)/", $message->content, $matches);
+
+        if (count($matches) < 3) {
+            $message->reply("Unable to add command");
+            return;
+        }
+
+        $command = $matches[1];
+        $content = $matches[2];
+
+        $simpleCommand = new SimpleCommand();
+        $simpleCommand->name = str_replace('!', '', $command);
+        $simpleCommand->response = $content;
+        $simpleCommand->created_by = $message->author->username;
+        $simpleCommand->save();
+
+        $message->channel->sendMessage("{$simpleCommand->created_by} created {$command} command");
     }
 }
