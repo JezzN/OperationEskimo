@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\OE\OperationEskimo;
+use App\OE\WoW\BattlenetAccessTokenProvider;
 use App\OE\WoW\MythicLeaderboard;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -22,12 +23,19 @@ class ImportMythicPlusLeaderboards extends Command
     private $operationEskimo;
 
     private $raiders;
+    /** @var BattlenetAccessTokenProvider */
+    private $battlenetAccessTokenProvider;
+    /** @var \GuzzleHttp\Client */
+    private $guzzle;
 
-    public function __construct(Client $client, OperationEskimo $operationEskimo)
+    public function __construct(Client $client, OperationEskimo $operationEskimo, BattlenetAccessTokenProvider $battlenetAccessTokenProvider, \GuzzleHttp\Client $guzzle)
     {
         $this->client = $client;
         parent::__construct();
         $this->operationEskimo = $operationEskimo;
+        $this->battlenetAccessTokenProvider = $battlenetAccessTokenProvider;
+        $this->battlenetAccessTokenProvider->get();
+        $this->guzzle = $guzzle;
     }
 
     public function handle()
@@ -75,20 +83,28 @@ class ImportMythicPlusLeaderboards extends Command
         return in_array($member->profile->name, $this->raiders->toArray());
     }
     private function getLeaderBoard($dungeonId, $period) {
-        return $this->query("https://eu.api.battle.net/data/wow/connected-realm/" . self::CONNECTED_REALM_ID . "/mythic-leaderboard/{$dungeonId}/period/{$period}?namespace=dynamic-eu&locale=en_GB");
+        return $this->query("https://eu.api.blizzard.com/data/wow/connected-realm/" . self::CONNECTED_REALM_ID . "/mythic-leaderboard/{$dungeonId}/period/{$period}?namespace=dynamic-eu&locale=en_GB");
     }
 
     private function getCurrentPeriod() {
-        return $this->query("https://eu.api.battle.net/data/wow/mythic-challenge-mode/?namespace=dynamic-eu&locale=en_GB")->current_period;
+        return $this->query("https://eu.api.blizzard.com/data/wow/mythic-challenge-mode/?namespace=dynamic-eu&locale=en_GB")->current_period;
     }
 
     private function getCurrentLeaderBoards() {
-        return $this->query("https://eu.api.battle.net/data/wow/connected-realm/" . self::CONNECTED_REALM_ID . "/mythic-leaderboard/?namespace=dynamic-eu&locale=en_GB")->current_leaderboards;
+        return $this->query("https://eu.api.blizzard.com/data/wow/connected-realm/" . self::CONNECTED_REALM_ID . "/mythic-leaderboard/?namespace=dynamic-eu&locale=en_GB")->current_leaderboards;
     }
 
     private function query($url) {
-        $accessToken = config('operation-eskimo.access-token');
+        $accessToken = $this->battlenetAccessTokenProvider->get();
 
-        return json_decode(file_get_contents("{$url}&access_token={$accessToken}"));
+        $response = $this->guzzle->get("{$url}&access_token={$accessToken}", [
+            'Authorization' => 'Bearer ' . $accessToken,
+        ]);
+
+        if ($response->getStatusCode() != 200) {
+            throw new \Exception("Unable to access leaderboard api, got status code: " + $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody()->getContents());
     }
 }
