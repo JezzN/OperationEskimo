@@ -18,7 +18,6 @@ class DiscordReporter
     private $reports = [
         ReportNewForumThreads::class,
         ReportRosterChanges::class,
-        ReportNewMmoChampionPosts::class,
         ReportForumResponses::class,
         ReportMythicChestItems::class,
         ReportWowProgressRecruitment::class,

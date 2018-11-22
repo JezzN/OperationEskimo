@@ -35,13 +35,10 @@ class Kernel extends ConsoleKernel
         ParseForumConfigurationThreads::class,
         RunDiscordBot::class,
         ImportGuildMembers::class,
-        ImportMmoChampionThreads::class,
         CheckWoWProgressRecruitment::class,
         ImportBluePosts::class,
-        ImportRecruitmentFromWowProgress::class,
         ImportCharacterRep::class,
         ImportCharacterHeartOfAzeroth::class,
-        ImportMythicPlusCompletions::class,
         ImportRealmStatus::class,
         ImportMythicPlusLeaderboards::class
     ];
