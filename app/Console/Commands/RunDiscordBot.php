@@ -84,11 +84,11 @@ class RunDiscordBot extends Command
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToGeneralChat($this->mythicPlus->generateMessage());
             }
 
-            if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 7 && $now->minute == 0) {
+            if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 19 && $now->minute == 0) {
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
             }
 
-            if ($now->dayOfWeek == Carbon::SUNDAY && $now->hour == 7 && $now->minute == 0) {
+            if ($now->dayOfWeek == Carbon::SUNDAY && $now->hour == 19 && $now->minute == 0) {
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
             }
         });
