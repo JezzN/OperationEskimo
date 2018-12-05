@@ -87,6 +87,10 @@ class RunDiscordBot extends Command
             if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 7 && $now->minute == 0) {
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
             }
+
+            if ($now->dayOfWeek == Carbon::SUNDAY && $now->hour == 7 && $now->minute == 0) {
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
+            }
         });
 
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {
