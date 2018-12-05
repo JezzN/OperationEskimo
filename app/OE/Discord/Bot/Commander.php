@@ -2,6 +2,7 @@
 namespace App\OE\Discord\Bot;
 
 use App\OE\Discord\Bot\Commands\Dangerzone;
+use App\OE\Discord\Bot\Commands\HoAHallOfFame;
 use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\ListTurds;
@@ -21,7 +22,8 @@ class Commander
         'legendaries' => ListRecentLegendaryDrops::class,
         'dangerzone' => Dangerzone::class,
         'trials' => Trials::class,
-        'mythicplus' => MythicPlus::class
+        'mythicplus' => MythicPlus::class,
+        'hof' => HoAHallOfFame::class
     ];
 
     /**

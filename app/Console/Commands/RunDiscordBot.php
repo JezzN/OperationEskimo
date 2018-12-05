@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\OE\Discord\Bot\Commander;
+use App\OE\Discord\Bot\Commands\HoAHallOfFame;
 use App\OE\Discord\Bot\Commands\MythicPlus;
 use App\OE\Discord\OperationEskimoDiscord;
 use App\OE\Discord\Reporting\DiscordReporter;
 use App\OE\Discord\Utility\StartWipeFestBot;
 use App\OE\Forum\Discussion;
+use App\OE\WoW\HeartOfAzeroth;
 use Carbon\Carbon;
 use Discord\Discord;
 use Discord\WebSockets\Event;
@@ -47,11 +49,13 @@ class RunDiscordBot extends Command
      * @var MythicPlus
      */
     private $mythicPlus;
+    /** @var HoAHallOfFame */
+    private $hallOfFame;
 
     /**
      * ReportNewForumThreadsToDiscord constructor.
      */
-    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot, MythicPlus $mythicPlus)
+    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot, MythicPlus $mythicPlus, HoAHallOfFame $hallOfFame)
     {
         parent::__construct();
         $this->discord = $discord;
@@ -59,6 +63,7 @@ class RunDiscordBot extends Command
         $this->reporter = $reporter;
         $this->startWipeFestBot = $startWipeFestBot;
         $this->mythicPlus = $mythicPlus;
+        $this->hallOfFame = $hallOfFame;
     }
 
     /**
@@ -77,6 +82,10 @@ class RunDiscordBot extends Command
 
             if ($now->dayOfWeek == Carbon::TUESDAY && $now->hour == 9 && $now->minute == 17) {
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToGeneralChat($this->mythicPlus->generateMessage());
+            }
+
+            if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 7 && $now->minute == 0) {
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
             }
         });
 
