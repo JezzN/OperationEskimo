@@ -10,6 +10,7 @@ use App\OE\Discord\Reporting\DiscordReporter;
 use App\OE\Discord\Utility\StartWipeFestBot;
 use App\OE\Forum\Discussion;
 use App\OE\WoW\HeartOfAzeroth;
+use App\WoW\Incursion;
 use Carbon\Carbon;
 use Discord\Discord;
 use Discord\WebSockets\Event;
