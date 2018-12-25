@@ -29,7 +29,7 @@ class IncursionCommand extends Command
         $nextIncursion['start_time'] = $nextIncursion['start_time']->setTimezone('Europe/Paris');
         $nextIncursion['end_time'] = $nextIncursion['end_time']->setTimezone('Europe/Paris');
 
-        $reply .= "The next incursion starts on " . $nextIncursion['start_time']->format('l jS \a\t ga') . " (in " . Carbon::now()->diffForHumans($nextIncursion['start_time'], true, false, 3) . ") in " . $nextIncursion['zone'] . ' and ends on ' . $nextIncursion['end_time']->format('l jS \a\t ga') . '.';
+        $reply .= "The next incursion starts on **" . $nextIncursion['start_time']->format('l jS \a\t ga') . "** (in " . Carbon::now()->diffForHumans($nextIncursion['start_time'], true, false, 3) . ") in " . $nextIncursion['zone'] . ' and ends on **' . $nextIncursion['end_time']->format('l jS \a\t ga') . '**.';
 
         $message->channel->sendMessage($reply);
     }

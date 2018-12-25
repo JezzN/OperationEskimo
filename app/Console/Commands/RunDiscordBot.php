@@ -94,6 +94,17 @@ class RunDiscordBot extends Command
             }
         });
 
+        $this->discord->loop->addPeriodicTimer(45, function() {
+            $incursions = new Incursion();
+            $incursion = $incursions->getActiveIncursion();
+
+            if (!$incursion) return;
+
+            if(Carbon::now()->second(0)->eq($incursion['start_time'])) {
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("Incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->format('ga'));
+            }
+        });
+
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {
             $this->startWipeFestBot->start($message);
             $this->commander->execute($message, $this->discord);

@@ -39,6 +39,10 @@ class OperationEskimoDiscord
         return $this->sendMessage(config('operation-eskimo.discord-channel-test'), $message);
     }
 
+    public function sendMessageToIncursionsChannel($message) {
+        return $this->sendMessage(config('operation-eskimo.discord-channel-incursions'), $message);
+    }
+
     private function sendMessage($channelId, $message)
     {
         return $this->discord->factory(Channel::class, ['id' => $channelId])->sendMessage($message);
