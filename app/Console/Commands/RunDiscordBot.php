@@ -101,7 +101,7 @@ class RunDiscordBot extends Command
             if (!$incursion) return;
 
             if(Carbon::now()->second(0)->eq($incursion['start_time'])) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("Incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->format('ga'));
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("Incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->setTimezone('Europe/Paris')->format('ga'));
             }
         });
 
