@@ -30,7 +30,7 @@ class Incursion
                return $incurstion;
            }
 
-           if ($time->gt($incurstion['end_time']) ){
+           if ($time->lt($incurstion['start_time']) ){
                return null;
            }
        }

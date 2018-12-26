@@ -94,14 +94,14 @@ class RunDiscordBot extends Command
             }
         });
 
-        $this->discord->loop->addPeriodicTimer(45, function() {
+        $this->discord->loop->addPeriodicTimer(1, function() {
             $incursions = new Incursion();
             $incursion = $incursions->getActiveIncursion();
 
             if (!$incursion) return;
 
             if(Carbon::now()->second(0)->eq($incursion['start_time'])) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("Incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->setTimezone('Europe/Paris')->format('ga'));
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("An incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->setTimezone('Europe/Paris')->format('ga'));
             }
         });
 
