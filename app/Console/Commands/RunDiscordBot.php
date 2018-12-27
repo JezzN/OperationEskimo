@@ -94,7 +94,7 @@ class RunDiscordBot extends Command
             }
         });
 
-        $this->discord->loop->addPeriodicTimer(1, function() {
+        $this->discord->loop->addPeriodicTimer(45, function() {
             $incursions = new Incursion();
             $incursion = $incursions->getActiveIncursion();
 
