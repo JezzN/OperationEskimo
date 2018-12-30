@@ -52,8 +52,15 @@ class MythicPlus extends Command
     {
         $highest = MythicLeaderboard::whereBetween('completed_at', $this->lootStats->thisWeek())->where('character_name', $player)->orderBy('keystone_level', 'desc')->first();
 
-        $level = $highest ? $highest->keystone_level : "0";
+        $reply .= $player . $this->getCompletedDungeonInformation($highest) .PHP_EOL;
+    }
 
-        $reply .= $player . " ({$level})" .PHP_EOL;
+    private function getCompletedDungeonInformation(MythicLeaderboard $highest = null) {
+
+        if (!$highest) {
+            return "";
+        }
+
+        return " - {$highest->keystone_level} ({$highest->dungeon_name})";
     }
 }
