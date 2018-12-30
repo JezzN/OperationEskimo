@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\OE\Discord\Bot\Commander;
 use App\OE\Forum\Link;
 use App\OE\Forum\Setting;
 use Discord\Discord;
@@ -56,6 +57,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Discord::class, function() {
             return new Discord(['token' => config('operation-eskimo.discord-bot-token')]);
         });
+
+        $this->app->singleton(Commander::class, Commander::class);
     }
 
 }

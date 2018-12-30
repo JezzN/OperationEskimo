@@ -15,6 +15,8 @@ class MythicPlus extends Command
     /** @var OperationEskimo */
     private $operationEskimo;
 
+    protected $description = "Find out who has yet to complete the minimum key this reset";
+
     public function __construct(LootStats $lootStats, OperationEskimo $operationEskimo)
     {
         $this->lootStats = $lootStats;

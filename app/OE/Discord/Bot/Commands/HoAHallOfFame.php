@@ -8,6 +8,8 @@ use Discord\Parts\Channel\Message;
 
 class HoAHallOfFame extends Command
 {
+    protected $description = "Display the highest and lowest artifact levels in the guild";
+
     public function execute(Message $message)
     {
         $message->channel->sendMessage($this->generateMessage());

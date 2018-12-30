@@ -3,20 +3,19 @@
 namespace App\Console\Commands;
 
 use App\OE\Discord\Bot\Commander;
+use App\OE\Discord\Bot\Commands\Dangerzone;
 use App\OE\Discord\Bot\Commands\HoAHallOfFame;
+use App\OE\Discord\Bot\Commands\IncursionCommand;
+use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\MythicPlus;
+use App\OE\Discord\Bot\Commands\Trials;
 use App\OE\Discord\OperationEskimoDiscord;
-use App\OE\Discord\Reporting\DiscordReporter;
-use App\OE\Discord\Utility\StartWipeFestBot;
-use App\OE\Forum\Discussion;
-use App\OE\WoW\HeartOfAzeroth;
-use App\WoW\Incursion;
-use Carbon\Carbon;
+use App\OE\Discord\Tasks\IncursionTask;
+use App\OE\Discord\Tasks\MythicPlusTask;
+use App\OE\Discord\Tasks\ReporterTask;
 use Discord\Discord;
 use Discord\WebSockets\Event;
-use Illuminate\Cache\Repository;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 
 class RunDiscordBot extends Command
 {
@@ -40,31 +39,26 @@ class RunDiscordBot extends Command
     /** @var Commander */
     private $commander;
 
-    /** @var DiscordReporter */
-    private $reporter;
-    /**
-     * @var StartWipeFestBot
-     */
-    private $startWipeFestBot;
-    /**
-     * @var MythicPlus
-     */
-    private $mythicPlus;
-    /** @var HoAHallOfFame */
-    private $hallOfFame;
+    private $tasks = [
+        ReporterTask::class,
+        MythicPlusTask::class,
+        IncursionTask::class
+    ];
 
-    /**
-     * ReportNewForumThreadsToDiscord constructor.
-     */
-    public function __construct(Discord $discord, Commander $commander, DiscordReporter $reporter, StartWipeFestBot $startWipeFestBot, MythicPlus $mythicPlus, HoAHallOfFame $hallOfFame)
+    private $commands = [
+        'commands' => ListCommands::class,
+        'dangerzone' => Dangerzone::class,
+        'trials' => Trials::class,
+        'mythicplus' => MythicPlus::class,
+        'hof' => HoAHallOfFame::class,
+        'incursion' => IncursionCommand::class
+    ];
+
+    public function __construct(Discord $discord, Commander $commander)
     {
         parent::__construct();
         $this->discord = $discord;
         $this->commander = $commander;
-        $this->reporter = $reporter;
-        $this->startWipeFestBot = $startWipeFestBot;
-        $this->mythicPlus = $mythicPlus;
-        $this->hallOfFame = $hallOfFame;
     }
 
     /**
@@ -74,48 +68,38 @@ class RunDiscordBot extends Command
      */
     public function handle()
     {
-        $this->discord->loop->addPeriodicTimer(10, function() {
-            $this->reporter->report($this->discord);
-        });
+        $this->registerDiscordTasks();
 
-        $this->discord->loop->addPeriodicTimer(60, function() {
-            $now = Carbon::now()->setTimezone("Europe/Paris");
-
-            if ($now->dayOfWeek == Carbon::TUESDAY && $now->hour == 9 && $now->minute == 17) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToGeneralChat($this->mythicPlus->generateMessage());
-            }
-
-            if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 19 && $now->minute == 0) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
-            }
-
-            if ($now->dayOfWeek == Carbon::SUNDAY && $now->hour == 19 && $now->minute == 0) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
-            }
-        });
-
-        $this->discord->loop->addPeriodicTimer(45, function() {
-            $incursions = new Incursion();
-            $incursion = $incursions->getActiveIncursion();
-
-            if (!$incursion) return;
-
-            if(Carbon::now()->second(0)->eq($incursion['start_time'])) {
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("An incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->setTimezone('Europe/Paris')->format('ga'));
-            }
-
-            if(Carbon::now()->second(0)->addHour()->eq($incursion['end_time']->setTimezone('Europe/Paris'))) {
-                $nextStartTime = $incursions->getNextIncursion(Carbon::now()->addHour())['start_time']->setTimezone('Europe/Paris');
-
-                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("The incursion in ". $incursion['zone'] . " will end in 1 hour, the next incursion starts at " . $nextStartTime->format('ga'));
-            }
-        });
-
-        $this->discord->on(Event::MESSAGE_CREATE, function($message) {
-            $this->startWipeFestBot->start($message);
-            $this->commander->execute($message, $this->discord);
-        });
+        $this->registerCommandListener();
 
         $this->discord->run();
+    }
+
+    /**
+     * Register the recurring discord tasks.
+     *
+     */
+    public function registerDiscordTasks()
+    {
+        foreach ($this->tasks as $task) {
+            $task = app($task);
+
+            $this->discord->loop->addPeriodicTimer($task->getInterval(), function () use ($task) {
+                $task->execute($this->discord, OperationEskimoDiscord::forServer($this->discord));
+            });
+        }
+    }
+
+    /**
+     * Listens for and parses any typed commands.
+     *
+     */
+    public function registerCommandListener()
+    {
+        $this->commander->register($this->commands);
+
+        $this->discord->on(Event::MESSAGE_CREATE, function ($message) {
+            $this->commander->execute($message);
+        });
     }
 }

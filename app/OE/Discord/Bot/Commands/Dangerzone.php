@@ -14,8 +14,11 @@ class Dangerzone extends Command
 {
     /** @var OperationEskimo */
     private $operationEskimo;
+
     /** @var RosterConfiguration */
     private $configuration;
+
+    protected $description = "Show raiders that are not at the required artifact level";
 
     public function __construct(OperationEskimo $operationEskimo, RosterConfiguration $configuration)
     {

@@ -14,6 +14,8 @@ class IncursionCommand extends Command
 
     const DATE_FORMAT = 'l jS \a\t ga';
 
+    protected $description = "Find out when the next Incursion is happening";
+
     public function __construct(Incursion $incursion)
     {
         $this->incursion = $incursion;

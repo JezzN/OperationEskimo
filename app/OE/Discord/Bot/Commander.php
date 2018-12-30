@@ -1,38 +1,30 @@
 <?php
 namespace App\OE\Discord\Bot;
 
-use App\OE\Discord\Bot\Commands\Dangerzone;
-use App\OE\Discord\Bot\Commands\HoAHallOfFame;
-use App\OE\Discord\Bot\Commands\Incursion;
-use App\OE\Discord\Bot\Commands\IncursionCommand;
-use App\OE\Discord\Bot\Commands\ListRecentLegendaryDrops;
-use App\OE\Discord\Bot\Commands\ListCommands;
-use App\OE\Discord\Bot\Commands\ListTurds;
-use App\OE\Discord\Bot\Commands\MythicPlus;
-use App\OE\Discord\Bot\Commands\Nor;
-use App\OE\Discord\Bot\Commands\PlayFile;
 use App\OE\Discord\Bot\Commands\SimpleCommand;
-use App\OE\Discord\Bot\Commands\Spot;
-use App\OE\Discord\Bot\Commands\Svampjuggen;
-use App\OE\Discord\Bot\Commands\Trials;
 use Discord\Parts\Channel\Message;
 
 class Commander
 {
-    private $commands = [
-        'commands' => ListCommands::class,
-        'legendaries' => ListRecentLegendaryDrops::class,
-        'dangerzone' => Dangerzone::class,
-        'trials' => Trials::class,
-        'mythicplus' => MythicPlus::class,
-        'hof' => HoAHallOfFame::class,
-        'incursion' => IncursionCommand::class
-    ];
+    /**
+     * @var array
+     */
+    private $commands;
+
+    /**
+     * Register commands with the commander.
+     *
+     * Commander constructor.
+     * @param Command[]
+     */
+    public function register(array $commands)
+    {
+        $this->commands = $commands;
+    }
 
     /**
      * Determines if the message is a command and if it is, will execute the required command.
      *
-     * @author Jeremy
      * @param Message $message
      */
     public function execute(Message $message)
@@ -72,7 +64,7 @@ class Commander
      */
     private function extractCommandName(Message $message)
     {
-        return preg_replace('/[^a-z]/', '', strtolower($message->content));
+        return preg_replace('/[^a-z0-9A-Z]/', '', strtolower($message->content));
     }
 
     /**

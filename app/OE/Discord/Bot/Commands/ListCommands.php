@@ -26,13 +26,15 @@ class ListCommands extends Command
      */
     public function execute(Message $message)
     {
-        $reply = "Command List:" . PHP_EOL . PHP_EOL;
+        $reply = "!\n\nCommand List:" . PHP_EOL . PHP_EOL;
 
         foreach( $this->commander->getCommands() as $commandName => $command ) {
             $description = $this->commander->resolveCommand($commandName)->getDescription();
 
             $reply .= "**!{$commandName}** - {$description}" . PHP_EOL;
         }
+
+        $reply .= "\nSimple Commands:\n\n";
 
         foreach (SimpleCommand::whereNotNull('id')->get() as $simpleCommand) {
             $reply .= "**!{$simpleCommand->name}**" . PHP_EOL;
