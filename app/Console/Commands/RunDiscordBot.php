@@ -103,6 +103,12 @@ class RunDiscordBot extends Command
             if(Carbon::now()->second(0)->eq($incursion['start_time'])) {
                 OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("An incursion has started in ". $incursion['zone'] . " and will end at " . $incursion['end_time']->setTimezone('Europe/Paris')->format('ga'));
             }
+
+            if(Carbon::now()->second(0)->addHour()->eq($incursion['end_time']->setTimezone('Europe/Paris'))) {
+                $nextStartTime = $incursions->getNextIncursion(Carbon::now()->addHour())['start_time']->setTimezone('Europe/Paris');
+
+                OperationEskimoDiscord::forServer($this->discord)->sendMessageToIncursionsChannel("The incursion in ". $incursion['zone'] . " will end in 1 hour, the next incursion starts at " . $nextStartTime->format('ga'));
+            }
         });
 
         $this->discord->on(Event::MESSAGE_CREATE, function($message) {

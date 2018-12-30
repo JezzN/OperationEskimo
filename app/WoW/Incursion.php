@@ -38,8 +38,10 @@ class Incursion
        return null;
     }
 
-    public function getNextIncursion() {
-        $time = Carbon::now();
+    public function getNextIncursion($time = null) {
+        if (!$time) {
+            $time = Carbon::now();
+        }
 
         foreach ($this->incurstions as $incurstion) {
             if($incurstion['start_time']->gt($time)) {
