@@ -40,9 +40,9 @@ class RunDiscordBot extends Command
     private $commander;
 
     private $tasks = [
-        ReporterTask::class,
-        MythicPlusTask::class,
-        IncursionTask::class
+//        ReporterTask::class,
+//        MythicPlusTask::class,
+//        IncursionTask::class
     ];
 
     private $commands = [

@@ -17,12 +17,12 @@ class DiscordReporter
 {
     private $reports = [
         ReportNewForumThreads::class,
-        ReportRosterChanges::class,
+//        ReportRosterChanges::class,
         ReportForumResponses::class,
-        ReportMythicChestItems::class,
-        ReportWowProgressRecruitment::class,
-        ReportBluePosts::class,
-        ReportRealmStatus::class
+//        ReportMythicChestItems::class,
+//        ReportWowProgressRecruitment::class,
+//        ReportBluePosts::class,
+//        ReportRealmStatus::class
     ];
 
     public function report(Discord $discord)
