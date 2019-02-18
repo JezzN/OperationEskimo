@@ -55,10 +55,6 @@ class AppServiceProvider extends ServiceProvider
             return new Discord(['token' => config('operation-eskimo.discord-bot-token')]);
         });
 
-        $this->app->bind(\GuzzleHttp\Client::class, function() {
-            return new \GuzzleHttp\Client(['verify' => '/etc/mycertfile.pem']);
-        });
-
         $this->app->singleton(Commander::class, Commander::class);
     }
 
