@@ -28,7 +28,7 @@ class Dangerzone extends Command
 
     public function execute(Message $message)
     {
-        if( $message->channel->id == config('discord-channel-officer') ) {
+        if( $message->channel->id == config('operation-eskimo.discord-channel-officer') ) {
             if( trim($message->content) !== '!dangerzone' ) {
                 return $this->updateDangerzone($message);
             }
