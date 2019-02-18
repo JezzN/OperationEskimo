@@ -8,6 +8,7 @@ use App\OE\Discord\Bot\Commands\HoAHallOfFame;
 use App\OE\Discord\Bot\Commands\IncursionCommand;
 use App\OE\Discord\Bot\Commands\ListCommands;
 use App\OE\Discord\Bot\Commands\MythicPlus;
+use App\OE\Discord\Bot\Commands\RemoveSimpleCommand;
 use App\OE\Discord\Bot\Commands\Trials;
 use App\OE\Discord\OperationEskimoDiscord;
 use App\OE\Discord\Tasks\IncursionTask;
@@ -51,7 +52,8 @@ class RunDiscordBot extends Command
         'trials' => Trials::class,
         'mythicplus' => MythicPlus::class,
         'hof' => HoAHallOfFame::class,
-        'incursion' => IncursionCommand::class
+        'incursion' => IncursionCommand::class,
+        'remove' => RemoveSimpleCommand::class
     ];
 
     public function __construct(Discord $discord, Commander $commander)

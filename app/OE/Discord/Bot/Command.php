@@ -19,4 +19,8 @@ abstract class Command
     {
         return $this->description;
     }
+
+    public function cameFromOfficerChat(Message $message) : bool {
+        return $message->channel->id == config('operation-eskimo.discord-channel-officer');
+    }
 }

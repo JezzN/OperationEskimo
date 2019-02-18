@@ -92,6 +92,10 @@ class Commander
             $command = 'dangerzone';
         }
 
+        if (starts_with($command, 'remove')) {
+            $command = 'remove';
+        }
+
         return app($this->getCommands()[$command]);
     }
 
@@ -116,6 +120,10 @@ class Commander
     public function commandExists($command)
     {
         if (starts_with($command, 'dangerzone')) {
+            return true;
+        }
+
+        if (starts_with($command, 'remove')) {
             return true;
         }
 
