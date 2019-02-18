@@ -26,9 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('links', Link::orderBy('position')->get());
-        View::share('logo', Setting::where('key', 'logo_path')->first()->value);
-        View::share('favicon', Setting::where('key', 'favicon_path')->first()->value);
     }
 
     /**
@@ -56,6 +53,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Discord::class, function() {
             return new Discord(['token' => config('operation-eskimo.discord-bot-token')]);
+        });
+
+        $this->app->bind(\GuzzleHttp\Client::class, function() {
+            return new \GuzzleHttp\Client(['verify' => '/etc/mycertfile.pem']);
         });
 
         $this->app->singleton(Commander::class, Commander::class);

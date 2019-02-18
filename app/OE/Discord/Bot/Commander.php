@@ -39,7 +39,7 @@ class Commander
             if ($simpleCommand) {
                 $message->channel->sendMessage($simpleCommand->response);
             } else {
-                if ($message->channel->id == '471923279507226624') {
+                if ($message->channel->id == config('operation-eskimo.discord-channel-officer')) {
                     $this->addSimpleCommand($message, $command);
                 }
             }
@@ -88,6 +88,10 @@ class Commander
      */
     public function resolveCommand($command) : Command
     {
+        if (starts_with($command, 'dangerzone')) {
+            $command = 'dangerzone';
+        }
+
         return app($this->getCommands()[$command]);
     }
 
@@ -111,6 +115,10 @@ class Commander
      */
     public function commandExists($command)
     {
+        if (starts_with($command, 'dangerzone')) {
+            return true;
+        }
+
         return isset($this->getCommands()[$command]);
     }
 

@@ -16,7 +16,7 @@ return [
 
     'battle-net' => [
         'api-key' => env('BATTLE_NET_API_KEY'),
-        'guild-name' => 'Operation Eskimo',
+        'guild-name' => 'TheMisfits',
         'realm' => 'Ragnaros',
         'region' => 'eu',
     ],

@@ -36,7 +36,7 @@ class OperationEskimo
 
     public function raiderRanks()
     {
-        return [1,2,5,6,7];
+        return [1,2,4,7];
     }
 
     public function unknown()
@@ -68,7 +68,7 @@ class OperationEskimo
     {
         return [
             'officers' => count($this->byRank([1,2])),
-            'members' => count($this->byRank([5,6])),
+            'members' => count($this->byRank([4])),
             'trials' => count($this->byRank([7]))
         ];
     }

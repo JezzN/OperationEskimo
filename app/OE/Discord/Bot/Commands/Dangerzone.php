@@ -28,7 +28,7 @@ class Dangerzone extends Command
 
     public function execute(Message $message)
     {
-        if( in_array($message->channel->name, ['officerchat', 'bottest']) ) {
+        if( $message->channel->id == config('discord-channel-officer') ) {
             if( trim($message->content) !== '!dangerzone' ) {
                 return $this->updateDangerzone($message);
             }

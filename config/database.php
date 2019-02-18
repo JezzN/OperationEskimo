@@ -50,7 +50,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST'),
             'port' => env('DB_PORT', '3306'),
-            'database' => 'operation-eskimo',
+            'database' => 'misfits',
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD', 'n1203naqs0e912hj03nk12323eoqi4ej013o453'),
             'charset' => 'utf8',
