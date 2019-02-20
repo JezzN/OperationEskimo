@@ -15,6 +15,8 @@ class ReportMythicChestItems extends AbstractDatabaseChangeReporter
     /** @var OperationEskimo */
     private $oe;
 
+    private static $reported = [];
+
     /**
      * ReportMythicChestItems constructor.
      *
@@ -31,7 +33,7 @@ class ReportMythicChestItems extends AbstractDatabaseChangeReporter
     {
         $oeDiscord = OperationEskimoDiscord::forServer($discord);
 
-        $items = $this->getNewRecords(LootDrop::where('context', 'challenge-mode-jackpot')->where('item_level', '>=', 930)->where('loot_time', '>', Carbon::now()->subDay())->orderBy('loot_time', 'asc'));
+        $items = $this->getNewRecords(LootDrop::where('context', 'challenge-mode-jackpot')->where('item_level', '>=', 380)->where('loot_time', '>', Carbon::now()->subDay())->orderBy('loot_time', 'asc'));
 
         $raiderNames = $this->oe->raiders()->pluck('character_name');
 
@@ -39,7 +41,17 @@ class ReportMythicChestItems extends AbstractDatabaseChangeReporter
 
             if( ! $raiderNames->contains($item->character_name) ) continue;
 
-            $oeDiscord->sendMessageToGeneralChat("**{$item->character_name}** looted **{$item->name} ({$item->item_level})** from their mythic chest!");
+            if (in_array($item->id, static::$reported)) {
+                return;
+            }
+
+            static::$reported[] = $item->id;
+
+            if (empty($item->item_slot) || !in_array($item->item_slot, [2,3,5])) {
+                $oeDiscord->sendMessageToGeneralChat("**{$item->character_name}** looted **{$item->name} ({$item->item_level})** from their mythic chest!");
+            } else {
+                $oeDiscord->sendMessageToGeneralChat("**{$item->character_name}** discovered **{$item->name} ({$item->item_level})** from the Titan Residuum vendor!");
+            }
         }
     }
 }

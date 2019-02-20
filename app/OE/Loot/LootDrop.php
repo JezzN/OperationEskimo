@@ -31,6 +31,7 @@ class LootDrop extends Model
         $lootDrop->tooltip_color = $event['nameDescriptionColor'];
         $lootDrop->heroic_tooltip = $event['heroicTooltip'];
         $lootDrop->unique_identifier = $event['unique_identifier'];
+        $lootDrop->item_slot = $event['inventoryType'];
 
         return $lootDrop;
     }
