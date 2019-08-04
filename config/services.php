@@ -16,7 +16,7 @@ return [
 
     'battle-net' => [
         'api-key' => env('BATTLE_NET_API_KEY'),
-        'guild-name' => 'TheMisfits',
+        'guild-name' => 'Method Plus',
         'realm' => 'Ragnaros',
         'region' => 'eu',
     ],

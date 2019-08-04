@@ -129,11 +129,11 @@ class GuildLootDropsImporter
             return;
         }
 
-        $event = $event + $this->getItemDetails($event['itemId'], $event['bonusLists'])->jsonSerialize();
-
         try{
+            $event = $event + $this->getItemDetails($event['itemId'], $event['bonusLists'])->jsonSerialize();
             LootDrop::createFromLootEvent($event)->save();
         } catch ( \Exception $e ) {
+            echo "Skipping {$e->getMessage()}";
         }
     }
 }

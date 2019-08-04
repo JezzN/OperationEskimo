@@ -39,9 +39,7 @@ class Commander
             if ($simpleCommand) {
                 $message->channel->sendMessage($simpleCommand->response);
             } else {
-                if ($message->channel->id == config('operation-eskimo.discord-channel-officer')) {
-                    $this->addSimpleCommand($message, $command);
-                }
+                $this->addSimpleCommand($message, $command);
             }
 
             return;

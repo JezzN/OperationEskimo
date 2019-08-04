@@ -43,6 +43,10 @@ class OperationEskimoDiscord
         return $this->sendMessage(config('operation-eskimo.discord-channel-incursions'), $message);
     }
 
+    public function sendMessageToLootChannel($message) {
+        return $this->sendMessage(config('operation-eskimo.discord-channel-loot'), $message);
+    }
+
     private function sendMessage($channelId, $message)
     {
         return $this->discord->factory(Channel::class, ['id' => $channelId])->sendMessage($message);

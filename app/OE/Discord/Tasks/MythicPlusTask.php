@@ -48,11 +48,11 @@ class MythicPlusTask extends DiscordTask
             $operationEskimoDiscord->sendMessageToGeneralChat($this->mythicPlus->generateMessage());
         }
 
-        if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 19 && $now->minute == 0) {
+        if ($now->dayOfWeek == Carbon::MONDAY && $now->hour == 19 && $now->minute == 0) {
             $operationEskimoDiscord->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
         }
 
-        if ($now->dayOfWeek == Carbon::SUNDAY && $now->hour == 19 && $now->minute == 0) {
+        if ($now->dayOfWeek == Carbon::WEDNESDAY && $now->hour == 19 && $now->minute == 0) {
             $operationEskimoDiscord->sendMessageToBossDiscussion($this->hallOfFame->generateMessage());
         }
     }

@@ -28,7 +28,7 @@ class OeGuildApiResponse
      */
     public function raiders() : Collection
     {
-        return $this->filterByRank([0,1,3,6]);
+        return $this->filterByRank([0,2,3,4,5]);
     }
 
     public function isRaider($character)
