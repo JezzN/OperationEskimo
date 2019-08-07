@@ -48,7 +48,13 @@ class ReportMythicChestItems extends AbstractDatabaseChangeReporter
             static::$reported[] = $item->id;
 
             if (empty($item->item_slot) || !in_array($item->item_slot, [2,3,5])) {
-                $oeDiscord->sendMessageToLootChannel("**{$item->character_name}** looted **{$item->name} ({$item->item_level})** from their mythic chest!");
+                if ($item->has_sockets) {
+                    $socket = "with a socket";
+                } else {
+                    $socket = "";
+                }
+
+                $oeDiscord->sendMessageToLootChannel("**{$item->character_name}** looted **{$item->name} ({$item->item_level}) {$socket}** from their mythic chest!");
             } else {
                 $oeDiscord->sendMessageToLootChannel("**{$item->character_name}** discovered **{$item->name} ({$item->item_level})** from the Titan Residuum vendor!");
             }
